@@ -19,8 +19,7 @@ while True:
     cv2.imshow("Frame", frame)
     cv2.imshow("difference", difference)
 
-    key = cv2.waitKey(30)
-    if key == 27:
+    if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
 cv2.destroyAllWindows()
