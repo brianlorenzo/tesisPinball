@@ -20,13 +20,11 @@
 
 
 
-
-
-
 void setup() {
  Serial.begin(9600);
  IMPRIMIR(" ");
  IMPRIMIR("INICIALIZANDO");
+ IMPRIMIR("Esperar 5 segundos");
  delay(5000);
  pinConfig();
 
