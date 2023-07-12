@@ -105,7 +105,7 @@ void activarFlipper(char flipper, int tiempo_ms){
     digitalWrite(FLIPPER_DERECHO,HIGH);
     digitalWrite(LED_STATUS_FLIPPER, HIGH);
 
-    //levantar feedback de activacion
+    //TO DO: levantar feedback de activacion
     delay(tiempo_ms);
 
     //soltar flipper derecho
