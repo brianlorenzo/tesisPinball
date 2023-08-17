@@ -1,19 +1,44 @@
 // Pines
-#define FLIPPER_DERECHO 7
-#define FLIPPER_DERECHO_FBK 8
-#define DERECHO 'D'
 
-#define FLIPPER_IZQUIERDO 6
-#define FLIPPER_IZQUIERDO_FBK 9
+//----------------- F L I P P E R S ----------------- //
+#define FLIPPER_DERECHO 4
+#define FLIPPER_DERECHO_FBK 9
+#define DERECHO 'D'
+//Nombre consola: FD
+
+#define FLIPPER_IZQUIERDO 5
+#define FLIPPER_IZQUIERDO_FBK 10
 #define IZQUIERDO 'I'
+//Nombre consola: FI
 
 #define LED_STATUS_FLIPPER LED_BUILTIN
+
+//----------------- S L I N G S H O T S ----------------- //
+#define SLINGSHOT_DERECHO 6
+#define SLINGSHOT_DERECHO_FBK 11
+//Nombre consola: SD
+
+#define SLINGSHOT_IZQUIERDO 7
+#define SLINGSHOT_IZQUIERDO_FBK 12
+//Nombre consola: SI
+
+#define LED_STATUS_SLINGSHOT A0
+
+//----------------- B U M P E R S ----------------- //
+#define BUMPER_DERECHO 8
+#define BUMPER_IZQUIERDO_FBK 13
+//Nombre consola: BD
+
 
 #define RX_PIN 0
 
 // Comandos de juego
-#define ACTIVAR_FLIPPER_IZQUIERDO(ms) activarFlipper(IZQUIERDO, ms)
-#define ACTIVAR_FLIPPER_DERECHO(ms) activarFlipper(DERECHO,ms)
+#define ACTIVAR_FLIPPER_IZQUIERDO(ms)   activarFlipper(IZQUIERDO, ms)
+#define ACTIVAR_FLIPPER_DERECHO(ms)     activarFlipper(DERECHO,ms)
+#define ACTIVAR_SLINGSHOT_IZQUIERDO(ms) activarSlingshot(IZQUIERDO, ms)
+#define ACTIVAR_SLINGSHOT_DERECHO(ms)   activarSlingshot(DERECHO, ms)
+#define ACTIVAR_BUMPER_DERECHO(ms)      activarSlingshot(BUMPER, ms)
+
 
 // Comandos generales
 #define IMPRIMIR(msg) Serial.println(msg);
@@ -140,4 +165,10 @@ void activarFlipper(char flipper, int tiempo_ms){
 
   }
   
+}
+
+void  activarSlingshot(char slingshot, int tiempo_ms){
+
+  //TO DO
+
 }
