@@ -1,89 +1,156 @@
-// Pines
+// Pines Mecanismos
 
 //----------------- F L I P P E R S ----------------- //
-#define FLIPPER_DERECHO 4
-#define FLIPPER_DERECHO_FBK 9
-#define DERECHO 'D'
+#define LED_STATUS_FLIPPER A0
+
+#define FLIPPER_DERECHO 2
+#define FLIPPER_DERECHO_FBK 8
+
 //Nombre consola: FD
+#define SERIAL_FLIPPER_DERECHO "FD"
 
-#define FLIPPER_IZQUIERDO 5
-#define FLIPPER_IZQUIERDO_FBK 10
+#define FLIPPER_IZQUIERDO 3
+#define FLIPPER_IZQUIERDO_FBK 9
 #define IZQUIERDO 'I'
-//Nombre consola: FI
 
-#define LED_STATUS_FLIPPER LED_BUILTIN
+//Nombre consola: FI
+#define SERIAL_FLIPPER_IZQUIERDO "FI"
 
 //----------------- S L I N G S H O T S ----------------- //
-#define SLINGSHOT_DERECHO 6
-#define SLINGSHOT_DERECHO_FBK 11
+#define LED_STATUS_SLINGSHOT
+
+#define SLINGSHOT_DERECHO 4
+#define SLINGSHOT_DERECHO_FBK 10
+
 //Nombre consola: SD
+#define SERIAL_SLINGSHOT_DERECHO "SD"
 
-#define SLINGSHOT_IZQUIERDO 7
-#define SLINGSHOT_IZQUIERDO_FBK 12
+#define SLINGSHOT_IZQUIERDO 5
+#define SLINGSHOT_IZQUIERDO_FBK 11
+
 //Nombre consola: SI
+#define SERIAL_SLINGSHOT_IZQUIERDO "SI"
 
-#define LED_STATUS_SLINGSHOT A0
 
 //----------------- B U M P E R S ----------------- //
-#define BUMPER_DERECHO 8
-#define BUMPER_IZQUIERDO_FBK 13
+#define LED_STATUS_BUMPER
+
+#define BUMPER_DERECHO 6
+#define BUMPER_DERECHO_FBK 12
+
 //Nombre consola: BD
+#define SERIAL_BUMPER_DERECHO "BD"
+
+#define BUMPER_IZQUIERDO 7
+#define BUMPER_IZQUIERDO_FBK 13
+
+//Nombre consola: BI
+#define SERIAL_BUMPER_IZQUIERDO "BI"
+
+//----------------- B A L L   R E T U R N  ----------------- //
+#define LED_STATUS_BALL_RETURN
+
+#define BALL_RETURN
+#define BALL_RETURN_FBK
+
+//Nombre consola: BR
+#define SERIAL_BALL_RETURN "BR"
 
 
-#define RX_PIN 0
 
 // Comandos de juego
-#define ACTIVAR_FLIPPER_IZQUIERDO(ms)   activarFlipper(IZQUIERDO, ms)
-#define ACTIVAR_FLIPPER_DERECHO(ms)     activarFlipper(DERECHO,ms)
-#define ACTIVAR_SLINGSHOT_IZQUIERDO(ms) activarSlingshot(IZQUIERDO, ms)
-#define ACTIVAR_SLINGSHOT_DERECHO(ms)   activarSlingshot(DERECHO, ms)
-#define ACTIVAR_BUMPER_DERECHO(ms)      activarSlingshot(BUMPER, ms)
-
+#define ACTIVAR_FLIPPER_IZQUIERDO()     activarFlipper(SERIAL_FLIPPER_IZQUIERDO)
+#define ACTIVAR_FLIPPER_DERECHO()       activarFlipper(SERIAL_FLIPPER_DERECHO)
+#define ACTIVAR_SLINGSHOT_IZQUIERDO()   activarSlingshot(SERIAL_SLINGSHOT_IZQUIERDO)
+#define ACTIVAR_SLINGSHOT_DERECHO()     activarSlingshot(SERIAL_SLINGSHOT_DERECHO)
+#define ACTIVAR_BUMPER_DERECHO()        activarBumper(SERIAL_BUMPER_DERECHO)
+#define ACTIVAR_BUMPER_IZQUIERDO()      activarBumper(SERIAL_BUMPER_IZQUIERDO)
+#define ACTIVAR_BALL_RETURN()           activarBallReturn(SERIAL_BALL_RETURN)
 
 // Comandos generales
 #define IMPRIMIR(msg) Serial.println(msg);
+#define MEC_STANDBY 0
+#define MEC_ACTIVO  1
+#define MEC_ERROR   2
 
 
+// Indicadores
+#define LED_STATUS_MECANISMOS LED_BUILTIN
+
+
+void blinkLED(int led, int ms, int times = 1){
+      
+      for (int i = 0; i < times; i++) {
+      digitalWrite(led, HIGH);
+      delay(ms);
+      digitalWrite(led, LOW);
+      delay(ms);
+      }
+  }
 
 void setup() {
+ 
+ //SERIAL
  Serial.begin(9600);
  IMPRIMIR(" ");
  IMPRIMIR("INICIALIZANDO");
  IMPRIMIR("Esperar 5 segundos");
  delay(5000);
+
+ //PINES
+ 
+ 
  pinConfig();
+  
 
 }
 
 void loop() {
-   if (Serial.available()) {
-    char c = Serial.read();
+    if (Serial.available() > 0) {  // Verifica si hay datos disponibles en el puerto serial
+    String input = Serial.readString();  // Lee la cadena de caracteres desde el puerto serial
     
-    IMPRIMIR("Recibido");
-    IMPRIMIR(c);
-    
-    if (c != '\n'){
-      activarFlipper(c, 500);
-      
+    if (input.length() > 0) {
+      // Elimina el último carácter de la cadena
+      input = input.substring(0, input.length() - 1);
+
+      // Utiliza una serie de if-else para comparar la cadena de entrada
+      if (input == SERIAL_FLIPPER_DERECHO) {
+        Serial.println("Comando recibido: FD");
+        ACTIVAR_FLIPPER_DERECHO();
+        // Realiza acciones específicas para "SERIAL_FLIPPER_DERECHO" aquí
+      } else if (input == SERIAL_FLIPPER_IZQUIERDO) {
+        Serial.println("Comando recibido: FI");
+        // Realiza acciones específicas para "SERIAL_FLIPPER_IZQUIERDO" aquí
+        ACTIVAR_FLIPPER_IZQUIERDO();
+        
+      } else if (input == SERIAL_BALL_RETURN) {
+        Serial.println("Comando recibido: BR");
+        // Realiza acciones específicas para "SERIAL_BALL_RETURN" aquí
+      } else if (input == SERIAL_BUMPER_IZQUIERDO) {
+        Serial.println("Comando recibido: BI");
+        // Realiza acciones específicas para "SERIAL_BUMPER_IZQUIERDO" aquí
+      } else if (input == SERIAL_BUMPER_DERECHO) {
+        Serial.println("Comando recibido: BD");
+        // Realiza acciones específicas para "SERIAL_BUMPER_DERECHO" aquí
+      } else if (input == SERIAL_SLINGSHOT_DERECHO) {
+        Serial.println("Comando recibido: SD");
+        // Realiza acciones específicas para "SERIAL_SLINGSHOT_DERECHO" aquí
+      } else if (input == SERIAL_SLINGSHOT_IZQUIERDO) {
+        Serial.println("Comando recibido: SI");
+        // Realiza acciones específicas para "SERIAL_SLINGSHOT_IZQUIERDO" aquí
+      } else {
+        Serial.println("Comando no reconocido: " + input);
+        // Realiza acciones para comandos no reconocidos aquí
+      }
     }
-    
-   }
+  }
   
-  /*
-  
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(1000);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(1000);
-
-  */
-    
-
 }
 
 
 // FUNCIONES
 
+/*
 void serialInterrupt(){
   
   IMPRIMIR("");
@@ -94,81 +161,203 @@ void serialInterrupt(){
   IMPRIMIR("Caracter RECIBIDO");
   IMPRIMIR(recibido);
   IMPRIMIR(" ");
-  activarFlipper(recibido, 500);
+  activarFlipper(recibido);
   
-}
+}*/
 void pinConfig(){
+
+  // Configura cada pin entrada/salida como corresponde
+  // Hace una prueba rápida en los mecanismos y se fija de recibir feedback correctamente
+  // Indica en LED_STATUS_MECANISMOS el estado de cada uno de los mecanismos
+  // Comunica por Serial como va avanzando la configuración y su estado
   
   IMPRIMIR("****** P I N   C O N F I G *****");
   
   //Serial
   
 //    pinMode(RX_PIN, INPUT_PULLUP);
-//    // Interrupción a la función serialInterrupt cuando hay un cambio de HIGH a LOW
+//   // Interrupción a la función serialInterrupt cuando hay un cambio de HIGH a LOW
 //    attachInterrupt(digitalPinToInterrupt(RX_PIN), serialInterrupt, FALLING);  
 //    IMPRIMIR("RX Pin para interrupción CONFIG OK");
   
+  //LED Status Mecanismos
+    pinMode(LED_STATUS_MECANISMOS, OUTPUT);
+    digitalWrite(LED_STATUS_MECANISMOS, LOW);
+  
   //Flippers
-    pinMode(LED_STATUS_FLIPPER, OUTPUT);
     IMPRIMIR("LED de status flippers CONFIG OK");
   
     pinMode(FLIPPER_IZQUIERDO, OUTPUT);
     pinMode(FLIPPER_IZQUIERDO_FBK, INPUT);
+    //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Flipper Izquierdo CONFIG OK");
     
     pinMode(FLIPPER_DERECHO, OUTPUT);
     pinMode(FLIPPER_DERECHO_FBK, INPUT);
+    //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Flipper Derecho CONFIG OK");
+
+
+  //Slingshot
+    pinMode(SLINGSHOT_DERECHO, OUTPUT);
+    pinMode(SLINGSHOT_DERECHO_FBK, INPUT);
+    //TO DO: Chequear feedback antes de dar OK
+    IMPRIMIR("Slingshot Izquierdo CONFIG OK");
+    
+    pinMode(SLINGSHOT_IZQUIERDO, OUTPUT);
+    pinMode(SLINGSHOT_IZQUIERDO_FBK, INPUT);
+    //TO DO: Chequear feedback antes de dar OK
+    IMPRIMIR("Slingshot Derecho CONFIG OK");
+
+  //Bumper
+    pinMode(BUMPER_DERECHO, OUTPUT);
+    pinMode(BUMPER_DERECHO_FBK, INPUT);
+    //TO DO: Chequear feedback antes de dar OK
+    IMPRIMIR("Bumper Derecho CONFIG OK");
+
+    
+    pinMode(BUMPER_IZQUIERDO, OUTPUT);
+    pinMode(BUMPER_IZQUIERDO_FBK, INPUT);
+    //TO DO: Chequear feedback antes de dar OK
+    IMPRIMIR("Bumper Izquierdo CONFIG OK");
 }
 
-void activarFlipper(char flipper, int tiempo_ms){
-
-  if(flipper == DERECHO){
+void activarMecanismo(String mecanismo){
+  if (mecanismo == SERIAL_FLIPPER_DERECHO) {
     IMPRIMIR("Flipper   DERECHO");
     
-    //activar flipper derecho
-    digitalWrite(FLIPPER_DERECHO,HIGH);
+    // Activar flipper derecho
+    digitalWrite(FLIPPER_DERECHO, HIGH);
+    blinkLED(LED_STATUS_MECANISMOS, 100);
+    
+    // TO DO: levantar feedback de activación
+        
+    // Soltar flipper derecho
+    digitalWrite(FLIPPER_DERECHO, LOW);
+    // digitalWrite(LED_STATUS_FLIPPER, LOW);
+
+  } else if (mecanismo == SERIAL_FLIPPER_IZQUIERDO) {
+    IMPRIMIR("Flipper   IZQUIERDO");
+      
+    // Activar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
     digitalWrite(LED_STATUS_FLIPPER, HIGH);
 
-    //TO DO: levantar feedback de activacion
-    delay(tiempo_ms);
+    // TO DO: levantar feedback de activación
 
-    //soltar flipper derecho
-    digitalWrite(FLIPPER_DERECHO,LOW);
-    digitalWrite(LED_STATUS_FLIPPER,LOW);
+    // Soltar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_FLIPPER, LOW);
 
-  }
-  else {
-
-    if(flipper == IZQUIERDO){
-      IMPRIMIR("Flipper   IZQUIERDO");
+  } else if (mecanismo == SERIAL_BUMPER_DERECHO) {
+    // Bumper derecho
+    IMPRIMIR("Bumper   DERECHO");
       
-      //activar flipper izquierdo
-    
-      digitalWrite(FLIPPER_IZQUIERDO,HIGH);
-      digitalWrite(LED_STATUS_FLIPPER, HIGH);
-  
-      //levantar feedback de activacion
-      delay(tiempo_ms);
-  
-      //soltar flipper izquierdo
-      digitalWrite(FLIPPER_IZQUIERDO,LOW);
-      digitalWrite(LED_STATUS_FLIPPER,LOW);
-    }
-    else{
-      //Error al activar flippers
-      IMPRIMIR("ERROR al Activar Flippers")
-      IMPRIMIR("No se seleccionó un flipper correctamente para activar");
-      IMPRIMIR(">>> se recibió: ");
-      IMPRIMIR(flipper)
-    }
+    // Activar flipper izquierdo
+    digitalWrite(bUMPER_DERECHO, HIGH);
+    digitalWrite(LED_STATUS_BUMPER, HIGH);
 
+    // TO DO: levantar feedback de activación
+
+    // Soltar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_FLIPPER, LOW);
+
+  } else if (mecanismo == SERIAL_BUMPER_IZQUIERDO) {
+     
+    IMPRIMIR("Flipper   IZQUIERDO");
+      
+    // Activar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
+    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+
+    // TO DO: levantar feedback de activación
+
+    // Soltar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_FLIPPER, LOW);
+ 
+  } else if (mecanismo == SERIAL_SLINGSHOT_DERECHO) {
+    
+    IMPRIMIR("Flipper   IZQUIERDO");
+      
+    // Activar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
+    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+
+    // TO DO: levantar feedback de activación
+
+    // Soltar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_FLIPPER, LOW);
+
+  } else if (mecanismo == SERIAL_SLINGSHOT_IZQUIERDO) {
+    
+    IMPRIMIR("Flipper   IZQUIERDO");
+      
+    // Activar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
+    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+
+    // TO DO: levantar feedback de activación
+
+    // Soltar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_FLIPPER, LOW);
+
+  } else if (mecanismo == SERIAL_BALL_RETURN) {
+    
+    IMPRIMIR("Flipper   IZQUIERDO");
+      
+    // Activar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
+    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+
+    // TO DO: levantar feedback de activación
+
+    // Soltar flipper izquierdo
+    digitalWrite(FLIPPER_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_FLIPPER, LOW);
+
+  } else {
+    IMPRIMIR("Mecanismo incorrecto");
   }
   
 }
 
+
 void  activarSlingshot(char slingshot, int tiempo_ms){
+ 
 
   //TO DO
 
+}
+
+void  activarBumper(char slingshot, int tiempo_ms){
+  
+ 
+
+  //TO DO
+
+}
+
+
+void ledStatusMecanismo(int estado){
+
+  switch (estado) {
+ 
+    case MEC_STANDBY: //Standby
+      blinkLED(LED_STATUS_MECANISMOS, 300, 5);
+      break;
+      
+    case MEC_ERROR: //Error
+      blinkLED(LED_STATUS_MECANISMOS, 150, 10);
+      break;
+      
+    default:
+      IMPRIMIR("No se seleccionó un estado correcto. El mecanismo NO fue activado con éxito");
+      break;
+}
+    
+  
 }
