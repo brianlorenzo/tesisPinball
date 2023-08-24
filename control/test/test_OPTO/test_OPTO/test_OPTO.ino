@@ -17,7 +17,7 @@
 #define SERIAL_FLIPPER_IZQUIERDO "FI"
 
 //----------------- S L I N G S H O T S ----------------- //
-#define LED_STATUS_SLINGSHOT
+#define LED_STATUS_SLINGSHOT 13
 
 #define SLINGSHOT_DERECHO 4
 #define SLINGSHOT_DERECHO_FBK 10
@@ -33,7 +33,7 @@
 
 
 //----------------- B U M P E R S ----------------- //
-#define LED_STATUS_BUMPER
+#define LED_STATUS_BUMPER 13
 
 #define BUMPER_DERECHO 6
 #define BUMPER_DERECHO_FBK 12
@@ -48,10 +48,10 @@
 #define SERIAL_BUMPER_IZQUIERDO "BI"
 
 //----------------- B A L L   R E T U R N  ----------------- //
-#define LED_STATUS_BALL_RETURN
+#define LED_STATUS_BALL_RETURN 13
 
-#define BALL_RETURN
-#define BALL_RETURN_FBK
+#define BALL_RETURN 12
+#define BALL_RETURN_FBK 13
 
 //Nombre consola: BR
 #define SERIAL_BALL_RETURN "BR"
@@ -59,13 +59,13 @@
 
 
 // Comandos de juego
-#define ACTIVAR_FLIPPER_IZQUIERDO()     activarFlipper(SERIAL_FLIPPER_IZQUIERDO)
-#define ACTIVAR_FLIPPER_DERECHO()       activarFlipper(SERIAL_FLIPPER_DERECHO)
-#define ACTIVAR_SLINGSHOT_IZQUIERDO()   activarSlingshot(SERIAL_SLINGSHOT_IZQUIERDO)
-#define ACTIVAR_SLINGSHOT_DERECHO()     activarSlingshot(SERIAL_SLINGSHOT_DERECHO)
-#define ACTIVAR_BUMPER_DERECHO()        activarBumper(SERIAL_BUMPER_DERECHO)
-#define ACTIVAR_BUMPER_IZQUIERDO()      activarBumper(SERIAL_BUMPER_IZQUIERDO)
-#define ACTIVAR_BALL_RETURN()           activarBallReturn(SERIAL_BALL_RETURN)
+#define ACTIVAR_FLIPPER_IZQUIERDO()     activarMecanismo(SERIAL_FLIPPER_IZQUIERDO)
+#define ACTIVAR_FLIPPER_DERECHO()       activarMecanismo(SERIAL_FLIPPER_DERECHO)
+#define ACTIVAR_SLINGSHOT_IZQUIERDO()   activarMecanismo(SERIAL_SLINGSHOT_IZQUIERDO)
+#define ACTIVAR_SLINGSHOT_DERECHO()     activarMecanismo(SERIAL_SLINGSHOT_DERECHO)
+#define ACTIVAR_BUMPER_DERECHO()        activarMecanismo(SERIAL_BUMPER_DERECHO)
+#define ACTIVAR_BUMPER_IZQUIERDO()      activarMecanismo(SERIAL_BUMPER_IZQUIERDO)
+#define ACTIVAR_BALL_RETURN()           activarMecanismo(SERIAL_BALL_RETURN)
 
 // Comandos generales
 #define IMPRIMIR(msg) Serial.println(msg);
@@ -250,74 +250,73 @@ void activarMecanismo(String mecanismo){
     digitalWrite(LED_STATUS_FLIPPER, LOW);
 
   } else if (mecanismo == SERIAL_BUMPER_DERECHO) {
-    // Bumper derecho
+
     IMPRIMIR("Bumper   DERECHO");
       
-    // Activar flipper izquierdo
-    digitalWrite(bUMPER_DERECHO, HIGH);
+    digitalWrite(BUMPER_DERECHO, HIGH);
     digitalWrite(LED_STATUS_BUMPER, HIGH);
 
     // TO DO: levantar feedback de activación
 
     // Soltar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_FLIPPER, LOW);
+    digitalWrite(BUMPER_DERECHO, LOW);
+    digitalWrite(LED_STATUS_BUMPER, LOW);
 
   } else if (mecanismo == SERIAL_BUMPER_IZQUIERDO) {
      
-    IMPRIMIR("Flipper   IZQUIERDO");
+    IMPRIMIR("Bumper   IZQUIERDO");
       
     // Activar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
-    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+    digitalWrite(BUMPER_IZQUIERDO, HIGH);
+    digitalWrite(LED_STATUS_BUMPER, HIGH);
 
     // TO DO: levantar feedback de activación
 
     // Soltar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_FLIPPER, LOW);
+    digitalWrite(BUMPER_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_BUMPER, LOW);
  
   } else if (mecanismo == SERIAL_SLINGSHOT_DERECHO) {
     
-    IMPRIMIR("Flipper   IZQUIERDO");
+    IMPRIMIR("Slingshot   DERECHO");
       
     // Activar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
-    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+    digitalWrite(SLINGSHOT_DERECHO, HIGH);
+    digitalWrite(LED_STATUS_SLINGSHOT, HIGH);
 
     // TO DO: levantar feedback de activación
 
     // Soltar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_FLIPPER, LOW);
+    digitalWrite(SLINGSHOT_DERECHO, LOW);
+    digitalWrite(LED_STATUS_SLINGSHOT, LOW);
 
   } else if (mecanismo == SERIAL_SLINGSHOT_IZQUIERDO) {
     
-    IMPRIMIR("Flipper   IZQUIERDO");
+    IMPRIMIR("Slingshot   IZQUIERDO");
       
     // Activar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
-    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+    digitalWrite(SLINGSHOT_IZQUIERDO, HIGH);
+    digitalWrite(LED_STATUS_SLINGSHOT, HIGH);
 
     // TO DO: levantar feedback de activación
 
     // Soltar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_FLIPPER, LOW);
+    digitalWrite(SLINGSHOT_IZQUIERDO, LOW);
+    digitalWrite(LED_STATUS_SLINGSHOT, LOW);
 
   } else if (mecanismo == SERIAL_BALL_RETURN) {
     
-    IMPRIMIR("Flipper   IZQUIERDO");
+    IMPRIMIR("BALL RETURN");
       
     // Activar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, HIGH);
-    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+    digitalWrite(BALL_RETURN, HIGH);
+    digitalWrite(LED_STATUS_BALL_RETURN, HIGH);
 
     // TO DO: levantar feedback de activación
 
-    // Soltar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_FLIPPER, LOW);
+    //
+    digitalWrite(BALL_RETURN, LOW);
+    digitalWrite(LED_STATUS_BALL_RETURN, LOW);
 
   } else {
     IMPRIMIR("Mecanismo incorrecto");
