@@ -77,6 +77,13 @@
 // Indicadores
 #define LED_STATUS_MECANISMOS LED_BUILTIN
 
+// Variables Globales
+
+//Delay no bloqueante
+unsigned long previousMillis = 0;
+unsigned long delayInterval = 1000;
+bool delayInProgress = false;
+
 
 void blinkLED(int led, int ms, int times = 1){
       
@@ -88,6 +95,50 @@ void blinkLED(int led, int ms, int times = 1){
       }
   }
 
+ void serialActivation(String input){
+  
+  if (input.length() > 0) {
+    // Elimina el último carácter de la cadena
+    input = input.substring(0, input.length() - 1);
+
+    // Utiliza una serie de if-else para comparar la cadena de entrada
+    if (input == SERIAL_FLIPPER_DERECHO) {
+      Serial.println("Comando recibido: FD");
+      ACTIVAR_FLIPPER_DERECHO();
+      // Realiza acciones específicas para "SERIAL_FLIPPER_DERECHO" aquí
+    } else if (input == SERIAL_FLIPPER_IZQUIERDO) {
+      Serial.println("Comando recibido: FI");
+      // Realiza acciones específicas para "SERIAL_FLIPPER_IZQUIERDO" aquí
+      ACTIVAR_FLIPPER_IZQUIERDO();
+      
+    } else if (input == SERIAL_BALL_RETURN) {
+      Serial.println("Comando recibido: BR");
+      // Realiza acciones específicas para "SERIAL_BALL_RETURN" aquí
+    } else if (input == SERIAL_BUMPER_IZQUIERDO) {
+      Serial.println("Comando recibido: BI");
+      // Realiza acciones específicas para "SERIAL_BUMPER_IZQUIERDO" aquí
+    } else if (input == SERIAL_BUMPER_DERECHO) {
+      Serial.println("Comando recibido: BD");
+      // Realiza acciones específicas para "SERIAL_BUMPER_DERECHO" aquí
+    } else if (input == SERIAL_SLINGSHOT_DERECHO) {
+      Serial.println("Comando recibido: SD");
+      // Realiza acciones específicas para "SERIAL_SLINGSHOT_DERECHO" aquí
+    } else if (input == SERIAL_SLINGSHOT_IZQUIERDO) {
+      Serial.println("Comando recibido: SI");
+      // Realiza acciones específicas para "SERIAL_SLINGSHOT_IZQUIERDO" aquí
+    } else {
+      Serial.println("Comando no reconocido: " + input);
+      // Realiza acciones para comandos no reconocidos aquí
+    }
+    
+  } 
+  else {
+    IMPRIMIR("ERROR: Mensaje recibido por serial incorrecto de largo menor a 0");
+  }
+}
+
+
+
 void setup() {
  
  //SERIAL
@@ -98,72 +149,25 @@ void setup() {
  delay(5000);
 
  //PINES
- 
- 
  pinConfig();
   
 
 }
 
 void loop() {
-    if (Serial.available() > 0) {  // Verifica si hay datos disponibles en el puerto serial
+    while (Serial.available() > 0) {  // Verifica si hay datos disponibles en el puerto serial
     String input = Serial.readString();  // Lee la cadena de caracteres desde el puerto serial
-    
-    if (input.length() > 0) {
-      // Elimina el último carácter de la cadena
-      input = input.substring(0, input.length() - 1);
 
-      // Utiliza una serie de if-else para comparar la cadena de entrada
-      if (input == SERIAL_FLIPPER_DERECHO) {
-        Serial.println("Comando recibido: FD");
-        ACTIVAR_FLIPPER_DERECHO();
-        // Realiza acciones específicas para "SERIAL_FLIPPER_DERECHO" aquí
-      } else if (input == SERIAL_FLIPPER_IZQUIERDO) {
-        Serial.println("Comando recibido: FI");
-        // Realiza acciones específicas para "SERIAL_FLIPPER_IZQUIERDO" aquí
-        ACTIVAR_FLIPPER_IZQUIERDO();
-        
-      } else if (input == SERIAL_BALL_RETURN) {
-        Serial.println("Comando recibido: BR");
-        // Realiza acciones específicas para "SERIAL_BALL_RETURN" aquí
-      } else if (input == SERIAL_BUMPER_IZQUIERDO) {
-        Serial.println("Comando recibido: BI");
-        // Realiza acciones específicas para "SERIAL_BUMPER_IZQUIERDO" aquí
-      } else if (input == SERIAL_BUMPER_DERECHO) {
-        Serial.println("Comando recibido: BD");
-        // Realiza acciones específicas para "SERIAL_BUMPER_DERECHO" aquí
-      } else if (input == SERIAL_SLINGSHOT_DERECHO) {
-        Serial.println("Comando recibido: SD");
-        // Realiza acciones específicas para "SERIAL_SLINGSHOT_DERECHO" aquí
-      } else if (input == SERIAL_SLINGSHOT_IZQUIERDO) {
-        Serial.println("Comando recibido: SI");
-        // Realiza acciones específicas para "SERIAL_SLINGSHOT_IZQUIERDO" aquí
-      } else {
-        Serial.println("Comando no reconocido: " + input);
-        // Realiza acciones para comandos no reconocidos aquí
-      }
+    //Usa el comando serial para activar mecanismos
+    serialActivation(input); 
+    
     }
-  }
   
 }
 
 
 // FUNCIONES
 
-/*
-void serialInterrupt(){
-  
-  IMPRIMIR("");
-  IMPRIMIR("Interrupción: SERIAL");
-  IMPRIMIR("");
-
-  char recibido = Serial.read();  // Leer el carácter recibido
-  IMPRIMIR("Caracter RECIBIDO");
-  IMPRIMIR(recibido);
-  IMPRIMIR(" ");
-  activarFlipper(recibido);
-  
-}*/
 void pinConfig(){
 
   // Configura cada pin entrada/salida como corresponde
@@ -173,10 +177,10 @@ void pinConfig(){
   
   IMPRIMIR("****** P I N   C O N F I G *****");
   
-  //Serial
+  //Habilitar Interrupción por Serial
   
 //    pinMode(RX_PIN, INPUT_PULLUP);
-//   // Interrupción a la función serialInterrupt cuando hay un cambio de HIGH a LOW
+//    Interrupción a la función serialInterrupt cuando hay un cambio de HIGH a LOW
 //    attachInterrupt(digitalPinToInterrupt(RX_PIN), serialInterrupt, FALLING);  
 //    IMPRIMIR("RX Pin para interrupción CONFIG OK");
   
@@ -324,23 +328,6 @@ void activarMecanismo(String mecanismo){
   
 }
 
-
-void  activarSlingshot(char slingshot, int tiempo_ms){
- 
-
-  //TO DO
-
-}
-
-void  activarBumper(char slingshot, int tiempo_ms){
-  
- 
-
-  //TO DO
-
-}
-
-
 void ledStatusMecanismo(int estado){
 
   switch (estado) {
@@ -356,7 +343,36 @@ void ledStatusMecanismo(int estado){
     default:
       IMPRIMIR("No se seleccionó un estado correcto. El mecanismo NO fue activado con éxito");
       break;
+  } 
 }
-    
+
+void _delay(unsigned long interval) {
+  if (!delayInProgress) {
+    // Iniciar el retraso no bloqueante
+    previousMillis = millis();
+    delayInterval = interval;
+    delayInProgress = true;
+  }
   
+  // Verificar si ha pasado el intervalo deseado
+  if (delayInProgress && (millis() - previousMillis >= delayInterval)) {
+    // El retraso ha terminado
+    delayInProgress = false;
+    // Realizar acciones adicionales después del retraso aquí
+  }
 }
+
+/*
+void serialInterrupt(){
+  
+  IMPRIMIR("");
+  IMPRIMIR("Interrupción: SERIAL");
+  IMPRIMIR("");
+
+  char recibido = Serial.read();  // Leer el carácter recibido
+  IMPRIMIR("Caracter RECIBIDO");
+  IMPRIMIR(recibido);
+  IMPRIMIR(" ");
+  activarFlipper(recibido);
+  
+}*/
