@@ -1,7 +1,7 @@
 // Pines Mecanismos
-//asdasda
+//asdhashjd
 //----------------- F L I P P E R S ----------------- //
-
+#define LED_STATUS_FLIPPER A0
 
 #define FLIPPER_DERECHO 2
 #define FLIPPER_DERECHO_FBK 8
