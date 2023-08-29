@@ -57,7 +57,6 @@
 #define SERIAL_BALL_RETURN "BR"
 
 
-
 // Comandos de juego
 #define ACTIVAR_FLIPPER_IZQUIERDO()     activarMecanismo(SERIAL_FLIPPER_IZQUIERDO)
 #define ACTIVAR_FLIPPER_DERECHO()       activarMecanismo(SERIAL_FLIPPER_DERECHO)
@@ -77,7 +76,7 @@
 // Indicadores
 #define LED_STATUS_MECANISMOS LED_BUILTIN
 
-// Variables Globales
+// ------ V A R I A B L E S    G L O B A L E S ------ //
 
 //Delay no bloqueante
 unsigned long previousMillis = 0;
@@ -86,14 +85,14 @@ bool delayInProgress = false;
 
 
 void blinkLED(int led, int ms, int times = 1){
-      
-      for (int i = 0; i < times; i++) {
-      digitalWrite(led, HIGH);
-      delay(ms);
-      digitalWrite(led, LOW);
-      delay(ms);
-      }
+// Hace blink de un led por determinados ms "times" veces      
+  for (int i = 0; i < times; i++) {
+  digitalWrite(led, HIGH);
+  delay(ms);
+  digitalWrite(led, LOW);
+  delay(ms);
   }
+}
 
  void serialActivation(String input){
   
