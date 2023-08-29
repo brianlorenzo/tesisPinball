@@ -112,19 +112,34 @@ void blinkLED(int led, int ms, int times = 1){
       
     } else if (input == SERIAL_BALL_RETURN) {
       Serial.println("Comando recibido: BR");
-      // Realiza acciones específicas para "SERIAL_BALL_RETURN" aquí
+      
+      //Acciones para Ball Return aqui
+      ACTIVAR_BALL_RETURN();
+
     } else if (input == SERIAL_BUMPER_IZQUIERDO) {
       Serial.println("Comando recibido: BI");
+      
       // Realiza acciones específicas para "SERIAL_BUMPER_IZQUIERDO" aquí
+      ACTIVAR_BUMPER_IZQUIERDO();
+      
     } else if (input == SERIAL_BUMPER_DERECHO) {
       Serial.println("Comando recibido: BD");
+      
       // Realiza acciones específicas para "SERIAL_BUMPER_DERECHO" aquí
+      ACTIVAR_BUMPER_DERECHO();
+      
     } else if (input == SERIAL_SLINGSHOT_DERECHO) {
       Serial.println("Comando recibido: SD");
+     
       // Realiza acciones específicas para "SERIAL_SLINGSHOT_DERECHO" aquí
+      ACTIVAR_SLINGSHOT_DERECHO();
+      
     } else if (input == SERIAL_SLINGSHOT_IZQUIERDO) {
       Serial.println("Comando recibido: SI");
+      
       // Realiza acciones específicas para "SERIAL_SLINGSHOT_IZQUIERDO" aquí
+      ACTIVAR_SLINGSHOT_IZQUIERDO();
+      
     } else {
       Serial.println("Comando no reconocido: " + input);
       // Realiza acciones para comandos no reconocidos aquí
