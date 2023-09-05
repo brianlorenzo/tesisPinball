@@ -25,11 +25,13 @@
 //Nombre consola: SD
 #define SERIAL_SLINGSHOT_DERECHO "SD"
 
+
 #define SLINGSHOT_IZQUIERDO 5
 #define SLINGSHOT_IZQUIERDO_FBK 11
 
 //Nombre consola: SI
 #define SERIAL_SLINGSHOT_IZQUIERDO "SI"
+
 
 
 //----------------- B U M P E R S ----------------- //
@@ -46,6 +48,7 @@
 
 //Nombre consola: BI
 #define SERIAL_BUMPER_IZQUIERDO "BI"
+
 
 //----------------- B A L L   R E T U R N  ----------------- //
 #define LED_STATUS_BALL_RETURN 13
@@ -72,18 +75,64 @@
 #define MEC_ACTIVO  1
 #define MEC_ERROR   2
 
+// ------------ I N D I C A D O R E S ------------ //
+#include <Adafruit_NeoPixel.h>
 
-// Indicadores
+// L E D   I N T E R N O
+#define LED_INTERNO 18 // El pin al que está conectado el LED RGB
 #define LED_STATUS_MECANISMOS LED_BUILTIN
 
-// ------ V A R I A B L E S    G L O B A L E S ------ //
+// Parámetros de configuración del LED RGB
+#define NUM_PIXELS 1 // Número de LEDs en la tira (en este caso, solo uno)
+#define BRIGHTNESS 50 // Brillo (ajusta según tus preferencias)
 
-//Delay no bloqueante
-unsigned long previousMillis = 0;
-unsigned long delayInterval = 1000;
-bool delayInProgress = false;
+//Inicializa el LED Neopixel
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, LED_INTERNO, NEO_GRB + NEO_KHZ800);
 
+// Define las constantes para los colores
+#define COLOR_RED strip.Color(255, 0, 0)
+#define COLOR_GREEN strip.Color(0, 255, 0)
+#define COLOR_YELLOW strip.Color(255, 255, 0)
+#define COLOR_BLUE strip.Color(0, 0, 255)
+#define COLOR_WHITE strip.Color(255, 255, 255)
+#define COLOR_ORANGE strip.Color(255, 165, 0)
+#define COLOR_PURPLE strip.Color(128, 0, 128)
+#define COLOR_LED_OFF strip.Color(0, 0, 0) 
 
+#define OFF "OFF"
+
+// Led interno Neopixel
+void ledSetup(){
+  strip.begin();
+  strip.setBrightness(BRIGHTNESS);
+  strip.show(); // Inicialmente, apagar el LED RGB
+}
+
+// Led interno Neopixel
+void setLED(String color) {
+  if (color == SERIAL_FLIPPER_DERECHO) {
+    strip.setPixelColor(0, COLOR_RED);
+  } else if (color == SERIAL_FLIPPER_IZQUIERDO) {
+    strip.setPixelColor(0, COLOR_GREEN);
+  } else if (color == SERIAL_SLINGSHOT_IZQUIERDO) {
+    strip.setPixelColor(0, COLOR_YELLOW);
+  } else if (color == SERIAL_SLINGSHOT_DERECHO) {
+    strip.setPixelColor(0, COLOR_BLUE);
+  } else if (color == SERIAL_BUMPER_DERECHO) {
+    strip.setPixelColor(0, COLOR_WHITE);
+  } else if (color == SERIAL_BUMPER_IZQUIERDO) {
+    strip.setPixelColor(0, COLOR_ORANGE);
+  } else if (color == SERIAL_BALL_RETURN) {
+    strip.setPixelColor(0, COLOR_PURPLE);
+  } else {
+    // Si el color no es uno de los especificados, apagar el LED
+    strip.setPixelColor(0, strip.Color(0, 0, 0));
+  }
+
+  strip.show(); // Actualizar el LED RGB con el color seleccionado
+}
+
+// Led en pin digital
 void blinkLED(int led, int ms, int times = 1){
 // Hace blink de un led por determinados ms "times" veces      
   for (int i = 0; i < times; i++) {
@@ -94,11 +143,21 @@ void blinkLED(int led, int ms, int times = 1){
   }
 }
 
+// ------ V A R I A B L E S    G L O B A L E S ------ //
+
+// Delay no bloqueante
+unsigned long previousMillis = 0;
+unsigned long delayInterval = 1000;
+bool delayInProgress = false;
+
+
  void serialActivation(String input){
   
   if (input.length() > 0) {
     // Elimina el último carácter de la cadena
     input = input.substring(0, input.length() - 1);
+
+    //Muestra LED del mecanismo seleccionado
 
     // Utiliza una serie de if-else para comparar la cadena de entrada
     if (input == SERIAL_FLIPPER_DERECHO) {
@@ -144,7 +203,7 @@ void blinkLED(int led, int ms, int times = 1){
       Serial.println("Comando no reconocido: " + input);
       // Realiza acciones para comandos no reconocidos aquí
     }
-    
+
   } 
   else {
     IMPRIMIR("ERROR: Mensaje recibido por serial incorrecto de largo menor a 0");
@@ -169,6 +228,7 @@ void setup() {
 }
 
 void loop() {
+    
     while (Serial.available() > 0) {  // Verifica si hay datos disponibles en el puerto serial
     String input = Serial.readString();  // Lee la cadena de caracteres desde el puerto serial
 
@@ -241,6 +301,9 @@ void pinConfig(){
 }
 
 void activarMecanismo(String mecanismo){
+
+  setLED(mecanismo);
+  
   if (mecanismo == SERIAL_FLIPPER_DERECHO) {
     IMPRIMIR("Flipper   DERECHO");
     
@@ -339,7 +402,10 @@ void activarMecanismo(String mecanismo){
   } else {
     IMPRIMIR("Mecanismo incorrecto");
   }
-  
+
+  //Aguantar LED y luego apagarlo
+  delay(1000);
+  setLED(OFF);
 }
 
 void ledStatusMecanismo(int estado){
