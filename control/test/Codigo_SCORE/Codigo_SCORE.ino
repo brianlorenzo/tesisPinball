@@ -1,22 +1,23 @@
 //CODIGO PARA CONTABILIZAR SCORE DURANTE LA PARTIDA
 
 //Inicializamos todos los tiempos en 0.
-unsigned long tiempoInicioPartida = 0;    // Tiempo en milisegundos en el que comenzó la partida.
-unsigned long tiempoInicioVida = 0;       // Tiempo en milisegundos en el que comenzó la vida actual.
+unsigned long tiempoInicioPartida = 0;                              // Tiempo en milisegundos en el que comenzó la partida.
+unsigned long tiempoInicioVida = 0;                                 // Tiempo en milisegundos en el que comenzó la vida actual.
 unsigned long duracionPartida = 0;
 unsigned long duracionVida = 0;
 
-//variablea que cambian a lo largo del juego.
-int puntaje = 0;                          // Puntaje acumulado, inicializado en 0.
-int vidas = 3;                            //Cantidad de vidas de cada "juego".
+//inicializamos variables que cambian a lo largo del juego.
 
-#define SENSORPIN 1                      //Pin de entrada del sensor de proximidad inductivo
+int puntaje = 0;                                                    // Puntaje acumulado, inicializado en 0.
+int vidas = 3;                                                      //Cantidad de vidas de cada "juego".
 
-#define SCORE_F 20                       //Flippers dan 20pts
-#define SCORE_S 15                      //Slingshots dan 15pts
-#define SCORE_B 10                      //Pop Bumpers dan 10pts
-#define SCORE_BR 5                      //Inicio de Partida de 5pts
-#define PUNTOS_POR_SEG 2                //Puntos por segundo de vida
+#define SENSORPIN 1                                                 //Pin de entrada del sensor de proximidad inductivo
+
+#define SCORE_F 20                                                  //Flippers dan 20pts
+#define SCORE_S 15                                                  //Slingshots dan 15pts
+#define SCORE_B 10                                                 //Pop Bumpers dan 10pts
+#define SCORE_BR 5                                               //Inicio de Partida de 5pts
+#define PUNTOS_POR_SEG 2                 //Puntos por segundo de vida
 
 
 //Defino los pines de feedback de los mecanismos.
