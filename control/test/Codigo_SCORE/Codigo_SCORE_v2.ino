@@ -93,7 +93,8 @@ void manejarFinDelJuego() {
 
 // Función para calcular puntos en función de la duración de la vida
 int calcularPuntosPorVida(unsigned long duracion) {
-  return int(duracion / 1000 * PUNTOS_POR_SEG + 0.5);           //2 punto por cada segundo de vida   ||  1000.0 para devolver un int
+  //le agrego el int para que devuelva un entero
+  return int(duracion / 1000.0 * PUNTOS_POR_SEG + 0.5);           //2 punto por cada segundo de vida   ||  1000.0 para devolver un int
 }
 //-------------------------------------------------------------------------
 
