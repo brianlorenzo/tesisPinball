@@ -25,6 +25,8 @@ void setup() {
 }
 
 
+
+
 void loop() {
      // I  N  I  C  I  A     E  L     J  U  E  G  O
     // Paso 1: Disparo la bola por primera vez.

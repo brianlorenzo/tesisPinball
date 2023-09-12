@@ -17,49 +17,79 @@
 
 
 
-//----------------- F L I P P E R S ----------------- //
+//----------------- F L I P P E R S -----------------//
 #define LED_STATUS_FLIPPER A0
+
 #define FLIPPER_DERECHO 2
 #define FLIPPER_DERECHO_FBK 8
+
+#define FLIPPER_DERECHO_ACTIVO digitalRead(FLIPPER_DERECHO_FBK)
+
 //Nombre consola: FD
 #define SERIAL_FLIPPER_DERECHO "FD"
-//-----------------//-----------------//-----------------
+//********************************************************//
 #define FLIPPER_IZQUIERDO 3
 #define FLIPPER_IZQUIERDO_FBK 9
-#define IZQUIERDO 'I'
+
+#define FLIPPER_IZQUIERDO_ACTIVO digitalRead(FLIPPER_IZQUIERDO_FBK);
+
 //Nombre consola: FI
 #define SERIAL_FLIPPER_IZQUIERDO "FI"
-//-----------------//-----------------//-----------------
-//----------------- S L I N G S H O T S ----------------- //
+//********************************************************//
+
+//----------------- S L I N G S H O T S -----------------//
 #define LED_STATUS_SLINGSHOT 13
+
 #define SLINGSHOT_DERECHO 4
 #define SLINGSHOT_DERECHO_FBK 10
+
+#define SLINGSHOT_DERECHO_ACTIVO digitalRead(SLINGSHOT_DERECHO_FBK);
+
 //Nombre consola: SD
 #define SERIAL_SLINGSHOT_DERECHO "SD"
-//-----------------//-----------------//-----------------
+//********************************************************//
 #define SLINGSHOT_IZQUIERDO 5
 #define SLINGSHOT_IZQUIERDO_FBK 11
+
+#define SLINGSHOT_IZQUIERDO_ACTIVO digitalRead(SLINGSHOT_IZQUIERDO_FBK);
+
 //Nombre consola: SI
 #define SERIAL_SLINGSHOT_IZQUIERDO "SI"
+//********************************************************//
+
 //----------------- B U M P E R S ----------------- //
 #define LED_STATUS_BUMPER 13
+
 #define BUMPER_DERECHO 6
 #define BUMPER_DERECHO_FBK 12
+
+#define BUMPER_DERECHO_ACTIVO digitalRead(BUMPER_DERECHO_FBK);
+
 //Nombre consola: BD
 #define SERIAL_BUMPER_DERECHO "BD"
-//-----------------//-----------------//-----------------
+//********************************************************//
 #define BUMPER_IZQUIERDO 7
 #define BUMPER_IZQUIERDO_FBK 13
+
+#define BUMPER_IZQUIERDO_ACTIVO digitalRead(BUMPER_IZQUIERDO_FBK);
+
 //Nombre consola: BI
 #define SERIAL_BUMPER_IZQUIERDO "BI"
-//-----------------//-----------------//-----------------
+//********************************************************//
+
 //----------------- B A L L   R E T U R N  ----------------- //
 #define LED_STATUS_BALL_RETURN 13
+
 #define BALL_RETURN 12
 #define BALL_RETURN_FBK 13
+
+#define BALL_RETURN_READY digitalRead(BALL_RETURN_FBK);
+//  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
+//  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
+
 //Nombre consola: BR
 #define SERIAL_BALL_RETURN "BR"
-//-----------------//-----------------//-----------------
+//********************************************************//
 
 
 // Comandos de juego
@@ -70,10 +100,6 @@
 #define ACTIVAR_BUMPER_DERECHO()        activarMecanismo(SERIAL_BUMPER_DERECHO)
 #define ACTIVAR_BUMPER_IZQUIERDO()      activarMecanismo(SERIAL_BUMPER_IZQUIERDO)
 #define ACTIVAR_BALL_RETURN()           activarMecanismo(SERIAL_BALL_RETURN)
-
-#define BALL_RETURN_READY digitalRead(BALL_RETURN_FBK)
-//  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
-//  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
 
 
 // Comandos generales
@@ -101,3 +127,8 @@
 #define COLOR_LED_OFF strip.Color(0, 0, 0) 
 
 #define OFF "OFF"
+
+
+
+//----------------- E R R O R E S ----------------- // 
+MEC_ACTIVATION_ERROR    IMPRIMIR("ERROR en la activación del mecanismo")

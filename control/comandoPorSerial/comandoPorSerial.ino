@@ -301,6 +301,8 @@ void pinConfig(){
 
 void activarMecanismo(String mecanismo){
 
+  IMPRIMIR("ACTIVAR MECANISMO");
+
   setLED(mecanismo);
   
   if (mecanismo == SERIAL_FLIPPER_DERECHO) {
@@ -308,12 +310,20 @@ void activarMecanismo(String mecanismo){
     
     // Activar flipper derecho
     digitalWrite(FLIPPER_DERECHO, HIGH);
+    
+    // LED status mecanismo
     blinkLED(LED_STATUS_MECANISMOS, 100);
     
     // TO DO: levantar feedback de activación
+    if( digitalRead(FLIPPER_DERECHO_FBK) ) {
+
+      // Soltar flipper derecho
+      digitalWrite(FLIPPER_DERECHO, LOW);
+    } else {
+
+    }
         
-    // Soltar flipper derecho
-    digitalWrite(FLIPPER_DERECHO, LOW);
+    
     // digitalWrite(LED_STATUS_FLIPPER, LOW);
 
     //scoreUpdate(SERIAL_FLIPPER_DERECHO);
