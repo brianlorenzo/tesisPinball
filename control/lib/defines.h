@@ -17,7 +17,7 @@
 
 
 
-//----------------- F L I P P E R S ----------------- //
+//----------------- F L I P P E R S -----------------//
 #define LED_STATUS_FLIPPER A0
 
 #define FLIPPER_DERECHO 2
@@ -27,7 +27,7 @@
 
 //Nombre consola: FD
 #define SERIAL_FLIPPER_DERECHO "FD"
-//-----------------//-----------------//-----------------
+//-----------------//-----------------//-----------------//
 #define FLIPPER_IZQUIERDO 3
 #define FLIPPER_IZQUIERDO_FBK 9
 
@@ -35,8 +35,9 @@
 
 //Nombre consola: FI
 #define SERIAL_FLIPPER_IZQUIERDO "FI"
-//-----------------//-----------------//-----------------
-//----------------- S L I N G S H O T S ----------------- //
+//-----------------//-----------------//-----------------//
+
+//----------------- S L I N G S H O T S -----------------//
 #define LED_STATUS_SLINGSHOT 13
 
 #define SLINGSHOT_DERECHO 4
@@ -46,7 +47,7 @@
 
 //Nombre consola: SD
 #define SERIAL_SLINGSHOT_DERECHO "SD"
-//-----------------//-----------------//-----------------
+//-----------------//-----------------//-----------------//
 #define SLINGSHOT_IZQUIERDO 5
 #define SLINGSHOT_IZQUIERDO_FBK 11
 
@@ -54,6 +55,8 @@
 
 //Nombre consola: SI
 #define SERIAL_SLINGSHOT_IZQUIERDO "SI"
+//-----------------//-----------------//-----------------//
+
 //----------------- B U M P E R S ----------------- //
 #define LED_STATUS_BUMPER 13
 
