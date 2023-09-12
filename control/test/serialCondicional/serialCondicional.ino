@@ -365,7 +365,12 @@ boolean activarMecanismo(String mecanismo){
 
   } else if (mecanismo == SERIAL_FLIPPER_IZQUIERDO) {
     IMPRIMIR("Flipper   IZQUIERDO");
-      
+
+
+// ******* T E R M I N A R    D E   C O M P L E T A R ********//
+   
+    
+    
     // Activar flipper izquierdo
     digitalWrite(FLIPPER_IZQUIERDO, HIGH);
     digitalWrite(LED_STATUS_FLIPPER, HIGH);
