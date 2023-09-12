@@ -1,5 +1,8 @@
 // Pines Mecanismos
 
+// incluir funciones ?
+
+
 //----------------- F L I P P E R S ----------------- //
 #define LED_STATUS_FLIPPER A0
 
@@ -143,7 +146,7 @@ void blinkLED(int led, int ms, int times = 1){
 }
 
 // ------ V A R I A B L E S    G L O B A L E S ------ //
-
+//    Esto va para main
 // Delay no bloqueante
 unsigned long previousMillis = 0;
 unsigned long delayInterval = 1000;

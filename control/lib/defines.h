@@ -1,6 +1,6 @@
 //libreria con todas las definiciones de los codigos:
 
-
+// Agregar: activarMecanismos o funcionesaux.h
 //Definiciones del SCORE:
 
 //Definicion del pin del sensor de proximidad inductivo
