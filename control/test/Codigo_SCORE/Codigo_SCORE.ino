@@ -1,3 +1,6 @@
+#include <defines.h>
+
+
 //CODIGO PARA CONTABILIZAR SCORE DURANTE LA PARTIDA
 
 //Inicializamos todos los tiempos en 0.
