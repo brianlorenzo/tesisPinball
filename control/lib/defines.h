@@ -3,8 +3,6 @@
 // Agregar: activarMecanismos o funcionesaux.h
 //Definiciones del SCORE:
 
-//Definicion del pin del sensor de proximidad inductivo
-#define SENSORPIN 1                                                //Pin de entrada del sensor de proximidad inductivo
 //Definicion de los puntajes
 #define SCORE_F 20                                                 //Flippers dan 20pts
 #define SCORE_S 15                                                 //Slingshots dan 15pts
@@ -72,6 +70,11 @@
 #define ACTIVAR_BUMPER_DERECHO()        activarMecanismo(SERIAL_BUMPER_DERECHO)
 #define ACTIVAR_BUMPER_IZQUIERDO()      activarMecanismo(SERIAL_BUMPER_IZQUIERDO)
 #define ACTIVAR_BALL_RETURN()           activarMecanismo(SERIAL_BALL_RETURN)
+
+#define BALL_RETURN_READY digitalRead(BALL_RETURN_FBK)
+//  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
+//  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
+
 
 // Comandos generales
 #define MEC_STANDBY 0

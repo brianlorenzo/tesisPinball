@@ -1,10 +1,8 @@
 //CODIGO PARA CONTABILIZAR SCORE DURANTE LA PARTIDA
 //Septiembre 2023
 
-//incluimos librerias
+//Librerias de defines
 #include <lib/defines.h>
-
-
 
 //Inicializamos todos los tiempos en 0.
 unsigned long tiempoInicioPartida = 0;                              // Tiempo en milisegundos en el que comenzó la partida.
@@ -18,10 +16,8 @@ int puntaje = 0;                                                   // Puntaje ac
 int vidas = 3;                                                     //Cantidad de vidas de cada "juego".
                                                
                                     
-
 void setup() {
-  Serial.begin(9600);
-  pinMode(SENSORPIN, INPUT_PULLUP);       
+  Serial.begin(9600);     
   
   pinMode(FLIPPER_DERECHO_FBK, INPUT_PULLUP);
   pinMode(FLIPPER_IZQUIERDO_FBK, INPUT_PULLUP);
@@ -30,20 +26,53 @@ void setup() {
   pinMode(BUMPER_DERECHO_FBK, INPUT_PULLUP);
   pinMode(BUMPER_IZQUIERDO_FBK, INPUT_PULLUP);
   pinMode(BALL_RETURN_FBK, INPUT_PULLUP);
+  
 }
+
+// I N I C I A   E L   J U E G O
+
+// Paso 1: Disparo la bola por primera vez
+if (BALL_RETURN_READY){
+  if (//Activar mecanismo//) {
+    //score_init();
+      // llevar tiempos a 0
+      // Inicializar las vidas (vidas = 3)
+      // Inicializar el tiempo de partida 
+    //
+  }else{
+
+     //No se pudo activar Mecanismo 
+     //ERROR EN MECANISMO
+  }
+  
+}else {
+  
+  //Ball return no está ready
+  //La bola no está o no está siendo detectada en el ball return
+
+  //ERROR EN DETECCIÓN DE BOLA
+  
+}
+
+
+
+
+
+
 
 void loop() {
   
-  
-  // Verificar si la partida ha comenzado y calcular la duración
-  if (tiempoInicioPartida == 0) {
+  // Verificar si está la bola para iniciar juego calcular la duración
+  if (BALL_RETURN_READY) {
+    
     tiempoInicioPartida = millis();        // Iniciar el tiempo de la partida
     tiempoInicioVida = millis();           // Iniciar el tiempo de la vida también
   } else {
    
    // Verificar si el sensor inductivo indica el retorno de la pelota
-    if (digitalRead(SENSORPIN) == HIGH) {
-      duracionVida = millis() - tiempoInicioVida;       
+    if (BALL_RETURN_READY) {
+      duracionVida = millis() - tiempoInicioVida; 
+            
       puntaje += calcularPuntosPorVida(duracionVida);
 
       // Reiniciar el tiempo de vida y reducir una vida
@@ -70,6 +99,7 @@ void manejarFinDelJuego() {
   IMPRIMIR("-------Puntaje total de la partida:-------");
   IMPRIMIR(puntaje);
   IMPRIMIR("-------Duracion total de la partida:-------");
+  // TO DO: Formatear tiempo de partida como (mm:ss) para imprimir
   IMPRIMIR(duracionPartida);
   
   

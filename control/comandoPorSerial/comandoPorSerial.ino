@@ -316,6 +316,9 @@ void activarMecanismo(String mecanismo){
     digitalWrite(FLIPPER_DERECHO, LOW);
     // digitalWrite(LED_STATUS_FLIPPER, LOW);
 
+    //scoreUpdate(SERIAL_FLIPPER_DERECHO);
+    //return booleano de que se activó
+
   } else if (mecanismo == SERIAL_FLIPPER_IZQUIERDO) {
     IMPRIMIR("Flipper   IZQUIERDO");
       
