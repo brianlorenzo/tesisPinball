@@ -1,7 +1,9 @@
-//CODIGO PARA CONTABILIZAR SCORE DURANTE LA PARTIDA
-//Septiembre 2023
+// - - CONTABILIZACION DEL SCORE DURANTE LA PARTIDA - -
+//LOS PUNTOS SE OBTIENEN POR ACCION DE MECANISMOS Y POR DURACION DE LA PARTIDA.
+//SE UTILIZAN LA FUNCION updateScore() Y SE CUENTA LA DURACION DE LA PARTIDA.
 
-//Libreria de defines
+
+//Librerias a incluir
 #include <defines.h>
 #include <scores.h>
 
@@ -13,8 +15,8 @@ int vidas;                                                     //Cantidad de vid
                                      
                                     
 void setup() {
-  Serial.begin(9600);     
-  
+  //Configuraciones necesarias para el microprocesador:
+  Serial.begin(9600);
   pinMode(FLIPPER_DERECHO_FBK, INPUT_PULLUP);
   pinMode(FLIPPER_IZQUIERDO_FBK, INPUT_PULLUP);
   pinMode(SLINGSHOT_DERECHO_FBK, INPUT_PULLUP);      
@@ -29,6 +31,8 @@ void setup() {
 void loop() {
      // I  N  I  C  I  A     E  L     J  U  E  G  O
     // Paso 1: Disparo la bola por primera vez.
+    //Se chequea que la pelota esta lista, y se chequea el disparo. 
+    //Hay dos errores posibles.
   if (BALL_RETURN_READY){
     if (ACTIVAR_BALL_RETURN()) {
       scoreInit();
@@ -36,19 +40,17 @@ void loop() {
       IMPRIMIR("Error en el mecanismo: No se pudo disparar la bola");
   }
   else {
-    IMPRIMIR("Ball return no está listo o disponible");
+    IMPRIMIR("Ball return no está listo o no disponible");
   }
   
-  
-  //Partida ya inició (bola en juego)
-  if (BALL_RETURN_READY && tiempoInicioPartida) {    //la partida ya inició, detecto se perdio una vida
-
-     // Reiniciar el tiempo de vida y reducir una vida
+  //Paso 2: Iniciar la segunda y tercera vida.  
+  //Partida ya inició, la bola está en juego.
+  if (BALL_RETURN_READY && tiempoInicioPartida) {             //la partida ya inició, detecto se perdio una vida.
      vidas--;
     // Verificar si se han agotado todas las vidas
       if (vidas == 0) {
-        duracionPartida = millis() - tiempoInicioPartida;
-        scoreFinal();
+        duracionPartida = millis() - tiempoInicioPartida;     //Calculo el tiempo final de la partida.
+        scoreFinal();                                         //Se llama a scoreFinal, que cierra el juego.
       }
     }
 
