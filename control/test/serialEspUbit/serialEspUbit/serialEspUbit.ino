@@ -214,7 +214,7 @@ bool delayInProgress = false;
 void setup() {
  
  //SERIAL
- Serial.begin(9600);
+ Serial.begin(115200);
  IMPRIMIR(" ");
  IMPRIMIR("INICIALIZANDO");
  IMPRIMIR("Esperar 5 segundos");
