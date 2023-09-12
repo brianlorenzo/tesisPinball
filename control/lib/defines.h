@@ -27,7 +27,7 @@
 
 //Nombre consola: FD
 #define SERIAL_FLIPPER_DERECHO "FD"
-//-----------------//-----------------//-----------------//
+//********************************************************//
 #define FLIPPER_IZQUIERDO 3
 #define FLIPPER_IZQUIERDO_FBK 9
 
@@ -35,7 +35,7 @@
 
 //Nombre consola: FI
 #define SERIAL_FLIPPER_IZQUIERDO "FI"
-//-----------------//-----------------//-----------------//
+//********************************************************//
 
 //----------------- S L I N G S H O T S -----------------//
 #define LED_STATUS_SLINGSHOT 13
@@ -47,7 +47,7 @@
 
 //Nombre consola: SD
 #define SERIAL_SLINGSHOT_DERECHO "SD"
-//-----------------//-----------------//-----------------//
+//********************************************************//
 #define SLINGSHOT_IZQUIERDO 5
 #define SLINGSHOT_IZQUIERDO_FBK 11
 
@@ -55,7 +55,7 @@
 
 //Nombre consola: SI
 #define SERIAL_SLINGSHOT_IZQUIERDO "SI"
-//-----------------//-----------------//-----------------//
+//********************************************************//
 
 //----------------- B U M P E R S ----------------- //
 #define LED_STATUS_BUMPER 13
@@ -67,7 +67,7 @@
 
 //Nombre consola: BD
 #define SERIAL_BUMPER_DERECHO "BD"
-//-----------------//-----------------//-----------------
+//********************************************************//
 #define BUMPER_IZQUIERDO 7
 #define BUMPER_IZQUIERDO_FBK 13
 
@@ -75,7 +75,8 @@
 
 //Nombre consola: BI
 #define SERIAL_BUMPER_IZQUIERDO "BI"
-//-----------------//-----------------//-----------------
+//********************************************************//
+
 //----------------- B A L L   R E T U R N  ----------------- //
 #define LED_STATUS_BALL_RETURN 13
 
@@ -88,7 +89,7 @@
 
 //Nombre consola: BR
 #define SERIAL_BALL_RETURN "BR"
-//-----------------//-----------------//-----------------
+//********************************************************//
 
 
 // Comandos de juego
