@@ -1,10 +1,11 @@
+
 // Pines Mecanismos
 
 //----------------- F L I P P E R S -----------------//
 #define LED_STATUS_FLIPPER A0
 
-#define FLIPPER_DERECHO 2
-#define FLIPPER_DERECHO_FBK 8
+#define FLIPPER_DERECHO 4
+#define FLIPPER_DERECHO_FBK 17
 
 #define FLIPPER_DERECHO_ACTIVO digitalRead(FLIPPER_DERECHO_FBK)
 boolean flipperDerechoActivo;
@@ -12,8 +13,8 @@ boolean flipperDerechoActivo;
 //Nombre consola: FD
 #define SERIAL_FLIPPER_DERECHO "FD"
 //********************************************************//
-#define FLIPPER_IZQUIERDO 3
-#define FLIPPER_IZQUIERDO_FBK 9
+#define FLIPPER_IZQUIERDO 5
+#define FLIPPER_IZQUIERDO_FBK 17
 
 #define FLIPPER_IZQUIERDO_ACTIVO digitalRead(FLIPPER_IZQUIERDO_FBK)
 boolean flipperIzquierdoActivo;
@@ -25,8 +26,8 @@ boolean flipperIzquierdoActivo;
 //----------------- S L I N G S H O T S -----------------//
 #define LED_STATUS_SLINGSHOT 13
 
-#define SLINGSHOT_DERECHO 4
-#define SLINGSHOT_DERECHO_FBK 10
+#define SLINGSHOT_DERECHO 6
+#define SLINGSHOT_DERECHO_FBK 17
 
 #define SLINGSHOT_DERECHO_ACTIVO digitalRead(SLINGSHOT_DERECHO_FBK)
 boolean slingshotDerechoActivo;
@@ -34,8 +35,8 @@ boolean slingshotDerechoActivo;
 //Nombre consola: SD
 #define SERIAL_SLINGSHOT_DERECHO "SD"
 //********************************************************//
-#define SLINGSHOT_IZQUIERDO 5
-#define SLINGSHOT_IZQUIERDO_FBK 11
+#define SLINGSHOT_IZQUIERDO 7
+#define SLINGSHOT_IZQUIERDO_FBK 17
 
 #define SLINGSHOT_IZQUIERDO_ACTIVO digitalRead(SLINGSHOT_IZQUIERDO_FBK)
 boolean slingshotIzquierdoActivo;
@@ -47,8 +48,8 @@ boolean slingshotIzquierdoActivo;
 //----------------- B U M P E R S ----------------- //
 #define LED_STATUS_BUMPER 13
 
-#define BUMPER_DERECHO 6
-#define BUMPER_DERECHO_FBK 12
+#define BUMPER_DERECHO 8
+#define BUMPER_DERECHO_FBK 17
 
 #define BUMPER_DERECHO_ACTIVO digitalRead(BUMPER_DERECHO_FBK)
 boolean bumperDerechoActivo;
@@ -57,7 +58,7 @@ boolean bumperDerechoActivo;
 #define SERIAL_BUMPER_DERECHO "BD"
 //********************************************************//
 #define BUMPER_IZQUIERDO 7
-#define BUMPER_IZQUIERDO_FBK 13
+#define BUMPER_IZQUIERDO_FBK 17
 
 #define BUMPER_IZQUIERDO_ACTIVO digitalRead(BUMPER_IZQUIERDO_FBK)
 boolean bumperIzquierdoActivo;
@@ -70,7 +71,7 @@ boolean bumperIzquierdoActivo;
 #define LED_STATUS_BALL_RETURN 13
 
 #define BALL_RETURN 12
-#define BALL_RETURN_FBK 13
+#define BALL_RETURN_FBK 17
 
 #define BALL_RETURN_ACTIVO digitalRead(BALL_RETURN_FBK)
 //  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
@@ -148,7 +149,7 @@ void setLED(String color) {
     strip.setPixelColor(0, COLOR_PURPLE);
   } else {
     // Si el color no es uno de los especificados, apagar el LED
-    strip.setPixelColor(0, strip.Color(0, 0, 0));
+    strip.setPixelColor(0, strip.Color(255, 255, 255));
   }
 
   strip.show(); // Actualizar el LED RGB con el color seleccionado
@@ -225,7 +226,7 @@ bool delayInProgress = false;
 
       
     } else {
-      Serial.print("  Comando no reconocido: ");
+      Serial.println("  Comando no reconocido: ");
       // Realiza acciones para comandos no reconocidos aquí
     }
 
@@ -342,8 +343,8 @@ boolean activarMecanismo(String mecanismo){
     digitalWrite(FLIPPER_DERECHO, HIGH);
     
     // Minimamente un delay acá? al menos de debug
-    delay(5000);
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
+    delay(5000);
 
     // TO DO: levantar feedback de activación
     if( FLIPPER_DERECHO_ACTIVO ) {
@@ -355,6 +356,7 @@ boolean activarMecanismo(String mecanismo){
     } else {
       //Error con la activación (podría ser reintentar?)
       IMPRIMIR("ERROR con activación");
+      digitalWrite(FLIPPER_DERECHO, LOW);
       return false;
     }
         
@@ -366,9 +368,8 @@ boolean activarMecanismo(String mecanismo){
     digitalWrite(FLIPPER_IZQUIERDO, HIGH);
     
     // Minimamente un delay acá? al menos de debug
-    delay(5000);
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-
+    delay(5000);
     // Levantar feedback de activación
     if( FLIPPER_IZQUIERDO_ACTIVO ) {
       // Soltar flipper derecho
@@ -379,6 +380,7 @@ boolean activarMecanismo(String mecanismo){
     } else {
       //Error con la activación (podría ser reintentar?)
       IMPRIMIR("ERROR con activación");
+      digitalWrite(FLIPPER_DERECHO, LOW);
       return false;
     }
     
@@ -387,8 +389,8 @@ boolean activarMecanismo(String mecanismo){
     digitalWrite(BUMPER_DERECHO, HIGH);
     
     // Minimamente un delay acá? al menos de debug
-    delay(5000);
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
+    delay(5000);
     
     // Levantar feedback de activación
     if( BUMPER_DERECHO_ACTIVO ) {
@@ -396,6 +398,7 @@ boolean activarMecanismo(String mecanismo){
       digitalWrite(BUMPER_DERECHO, LOW);
       //scoreUpdate(mecanismo);
       IMPRIMIR("feedback: Correcto");
+      digitalWrite(FLIPPER_DERECHO, LOW);
       return true;
     } else {
       //Error con la activación (podría ser reintentar?)
@@ -408,9 +411,9 @@ boolean activarMecanismo(String mecanismo){
     digitalWrite(BUMPER_IZQUIERDO, HIGH);
     
     // Minimamente un delay acá? al menos de debug
-    delay(5000);
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    
+    delay(5000);  
+      
     // Levantar feedback de activación
     if( BUMPER_IZQUIERDO_ACTIVO ) {
       // Soltar BUMPER
@@ -421,6 +424,7 @@ boolean activarMecanismo(String mecanismo){
     } else {
       //Error con la activación (podría ser reintentar?)
       IMPRIMIR("ERROR con activación");
+      digitalWrite(FLIPPER_DERECHO, LOW);
       return false;
     }
  
@@ -429,9 +433,8 @@ boolean activarMecanismo(String mecanismo){
     digitalWrite(SLINGSHOT_DERECHO, HIGH);
     
     // Minimamente un delay acá? al menos de debug
-    delay(5000);
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    
+    delay(5000);   
     // Levantar feedback de activación
     if( SLINGSHOT_DERECHO_ACTIVO ) {
       // Soltar SLINGSHOT
@@ -442,6 +445,7 @@ boolean activarMecanismo(String mecanismo){
     } else {
       //Error con la activación (podría ser reintentar?)
       IMPRIMIR("ERROR con activación");
+      digitalWrite(FLIPPER_DERECHO, LOW);
       return false;
     }
   } else if (mecanismo == SERIAL_SLINGSHOT_IZQUIERDO) {
@@ -449,9 +453,8 @@ boolean activarMecanismo(String mecanismo){
     digitalWrite(SLINGSHOT_IZQUIERDO, HIGH);
     
     // Minimamente un delay acá? al menos de debug
-    delay(5000);
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    
+    delay(5000);     
     // Levantar feedback de activación
     if( SLINGSHOT_IZQUIERDO_ACTIVO ) {
       // Soltar SLINGSHOT
@@ -462,15 +465,15 @@ boolean activarMecanismo(String mecanismo){
     } else {
       //Error con la activación (podría ser reintentar?)
       IMPRIMIR("ERROR con activación");
+      digitalWrite(FLIPPER_DERECHO, LOW);
       return false;
     }
   } else if (mecanismo == SERIAL_BALL_RETURN) {
     digitalWrite(BALL_RETURN, HIGH);
     
     // Minimamente un delay acá? al menos de debug
-    delay(5000);
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    
+    delay(5000);   
     // Levantar feedback de activación
     if( BALL_RETURN_ACTIVO ) {
       // Soltar SLINGSHOT
@@ -481,6 +484,7 @@ boolean activarMecanismo(String mecanismo){
     } else {
       //Error con la activación (podría ser reintentar?)
       IMPRIMIR("ERROR con activación");
+      digitalWrite(FLIPPER_DERECHO, LOW);
       return false;
     }
 
