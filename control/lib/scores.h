@@ -10,9 +10,8 @@ void scoreFinal() {
   IMPRIMIR("-------Puntaje total de la partida:-------");
   IMPRIMIR(puntaje);
   IMPRIMIR("-------Duracion total de la partida:-------");
-  // TO DO: Formatear tiempo de partida como (mm:ss) para imprimir
-  IMPRIMIR(duracionPartida);
-  
+  convierteTiempo(duracionPartida, log);
+  //puede ser que falte print.
 }
 
 
@@ -42,3 +41,12 @@ void scoreUpdate(String mecanismo){
     puntaje = puntaje + SCORE_BR;
   }
 }    
+
+void convierteTiempo(unsigned long tiempoEnMillis, char* resultado) {
+  unsigned long segundos = (tiempoEnMillis / 1000) % 60;
+  unsigned long minutos = (tiempoEnMillis / (60000)) % 60;
+  unsigned long horas = (tiempoEnMillis / (60000 * 60));
+
+  // Formatea la duración en "hh:mm:ss"
+  sprintf(resultado, "%02lu:%02lu:%02lu", horas, minutos, segundos);
+}
