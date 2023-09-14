@@ -1,18 +1,19 @@
 // - - CONTABILIZACION DEL SCORE DURANTE LA PARTIDA - -
 //LOS PUNTOS SE OBTIENEN POR ACCION DE MECANISMOS Y POR DURACION DE LA PARTIDA.
-//SE UTILIZAN LA FUNCION updateScore() Y SE CUENTA LA DURACION DE LA PARTIDA.
+//SE UTILIZAN LA FUNCION updateScore() Y SE CUENTA LA DURACION DE LA PARTIDA, AL FINAL DE LA MISMA.
 
 
 //Librerias a incluir
-#include <defines.h>
-#include <scores.h>
+#include <defines.h>                                            //Tiene todos los defines locales y globales.
+#include <scores.h>                                             //Tiene las funciones que usamos en el conteo del SCORE.
+
 
 //DECLARAMOS VARIABLES GLOBALES
 unsigned long tiempoInicioPartida;                              // Tiempo en milisegundos en el que comenzó la partida.                              // Tiempo en milisegundos en el que comenzó la vida actual.
 unsigned long duracionPartida;
-int puntaje;                                                   // Puntaje acumulado, inicializado en 0.
+unsigned long puntaje;                                                   // Varible usada para ir contando los puntos de la partida.
 int vidas;                                                     //Cantidad de vidas de cada "juego".
-                                     
+char log[12];                                     
                                     
 void setup() {
   //Configuraciones necesarias para el microprocesador:
@@ -47,7 +48,7 @@ void loop() {
   //Partida ya inició, la bola está en juego.
   if (BALL_RETURN_READY && tiempoInicioPartida) {             //la partida ya inició, detecto se perdio una vida.
      vidas--;
-    // Verificar si se han agotado todas las vidas
+    // Verificar si se han agotado todas las vidas.
       if (vidas == 0) {
         duracionPartida = millis() - tiempoInicioPartida;     //Calculo el tiempo final de la partida.
         scoreFinal();                                         //Se llama a scoreFinal, que cierra el juego.
