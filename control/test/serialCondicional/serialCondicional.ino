@@ -72,7 +72,7 @@ boolean bumperIzquierdoActivo;
 #define BALL_RETURN 12
 #define BALL_RETURN_FBK 13
 
-#define BALL_RETURN_ACTIVO digitalRead(BALL_RETURN_FBK);
+#define BALL_RETURN_ACTIVO digitalRead(BALL_RETURN_FBK)
 //  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
 //  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
 boolean ballReturnActivo;
@@ -465,7 +465,6 @@ boolean activarMecanismo(String mecanismo){
       return false;
     }
   } else if (mecanismo == SERIAL_BALL_RETURN) {
-    
     digitalWrite(BALL_RETURN, HIGH);
     
     // Minimamente un delay acá? al menos de debug
@@ -479,15 +478,15 @@ boolean activarMecanismo(String mecanismo){
       //scoreUpdate(mecanismo);
       IMPRIMIR("feedback: Correcto");
       return true;
-  } else {
-    IMPRIMIR("Mecanismo incorrecto");
+    } else {
+      //Error con la activación (podría ser reintentar?)
+      IMPRIMIR("ERROR con activación");
+      return false;
+    }
+
   }
-
-  //Aguantar LED y luego apagarlo
-  delay(1000);
-  setLED(OFF);
 }
-
+/*
 void ledStatusMecanismo(int estado){
 
   switch (estado) {
@@ -505,6 +504,7 @@ void ledStatusMecanismo(int estado){
       break;
   } 
 }
+*/
 
 void _delay(unsigned long interval) {
   if (!delayInProgress) {
