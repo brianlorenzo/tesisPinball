@@ -2,9 +2,10 @@
 
 //FUNCIONES QUE UTILIZAMOS EN LA LOGICA DEL JUEGO:
 
-// Función para manejar el final del juego
+// Función para manejar el final del juego.
 void scoreFinal() {
-  puntaje = duracionPartida / 1000.0 * PUNTOS_POR_SEG + 0.5;      //Se calculan puntajes en la partida y no en cada vida.
+  //round redondea, al imprimir usar (msg,0) para sacar los decimales.
+  puntaje = round(duracionPartida / 1000 * PUNTOS_POR_SEG);      //Se calculan puntajes en la partida y no en cada vida.
   IMPRIMIR("-----------------Game Over-----------------");
   IMPRIMIR("-------Puntaje total de la partida:-------");
   IMPRIMIR(puntaje);
