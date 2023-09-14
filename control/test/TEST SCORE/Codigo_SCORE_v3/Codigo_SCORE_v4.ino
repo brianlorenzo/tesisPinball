@@ -70,7 +70,7 @@ void setup() {
 void loop() {
      // I  N  I  C  I  A     E  L     J  U  E  G  O
     // Paso 1: Disparo la bola por primera vez.
-  if (BALL_RETURN_READY){
+  if (BALL_RETURN_ACTIVO){
     if (ACTIVAR_BALL_RETURN()) {
       scoreInit();
     }else{
@@ -82,7 +82,7 @@ void loop() {
   
   
   //Partida ya inició (bola en juego)
-  if (BALL_RETURN_READY && tiempoInicioPartida) {    //la partida ya inició, detecto se perdio una vida
+  if (BALL_RETURN_ACTIVO && tiempoInicioPartida) {    //la partida ya inició, detecto se perdio una vida
 
      // Reiniciar el tiempo de vida y reducir una vida
      vidas--;

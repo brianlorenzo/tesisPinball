@@ -72,7 +72,7 @@ boolean bumperIzquierdoActivo;
 #define BALL_RETURN 12
 #define BALL_RETURN_FBK 13
 
-#define BALL_RETURN_READY digitalRead(BALL_RETURN_FBK);
+#define BALL_RETURN_ACTIVO digitalRead(BALL_RETURN_FBK);
 //  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
 //  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
 boolean ballReturnActivo;
@@ -341,115 +341,144 @@ boolean activarMecanismo(String mecanismo){
     // Activar flipper derecho
     digitalWrite(FLIPPER_DERECHO, HIGH);
     
-    // LED status mecanismo
-    blinkLED(LED_STATUS_MECANISMOS, 100);
-    
-    // Minimamente un delay acá?
+    // Minimamente un delay acá? al menos de debug
+    delay(5000);
+    IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
 
     // TO DO: levantar feedback de activación
     if( FLIPPER_DERECHO_ACTIVO ) {
-
       // Soltar flipper derecho
       digitalWrite(FLIPPER_DERECHO, LOW);
       //scoreUpdate(mecanismo);
+      IMPRIMIR("feedback: Correcto");
       return true;
-      
     } else {
-
       //Error con la activación (podría ser reintentar?)
       IMPRIMIR("ERROR con activación");
       return false;
-
     }
         
 
   } else if (mecanismo == SERIAL_FLIPPER_IZQUIERDO) {
     IMPRIMIR("Flipper   IZQUIERDO");
-
-
-// ******* T E R M I N A R    D E   C O M P L E T A R ********//
-   
     
-    
-    // Activar flipper izquierdo
+    // Activar flipper derecho
     digitalWrite(FLIPPER_IZQUIERDO, HIGH);
-    digitalWrite(LED_STATUS_FLIPPER, HIGH);
+    
+    // Minimamente un delay acá? al menos de debug
+    delay(5000);
+    IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
 
-    // TO DO: levantar feedback de activación
-
-    // Soltar flipper izquierdo
-    digitalWrite(FLIPPER_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_FLIPPER, LOW);
-
+    // Levantar feedback de activación
+    if( FLIPPER_IZQUIERDO_ACTIVO ) {
+      // Soltar flipper derecho
+      digitalWrite(FLIPPER_IZQUIERDO, LOW);
+      //scoreUpdate(mecanismo);
+      IMPRIMIR("feedback: Correcto");
+      return true;
+    } else {
+      //Error con la activación (podría ser reintentar?)
+      IMPRIMIR("ERROR con activación");
+      return false;
+    }
+    
   } else if (mecanismo == SERIAL_BUMPER_DERECHO) {
-
-    IMPRIMIR("Bumper   DERECHO");
-      
+    // Activar bumper derecho
     digitalWrite(BUMPER_DERECHO, HIGH);
-    digitalWrite(LED_STATUS_BUMPER, HIGH);
-
-    // TO DO: levantar feedback de activación
-
-    // Soltar flipper izquierdo
-    digitalWrite(BUMPER_DERECHO, LOW);
-    digitalWrite(LED_STATUS_BUMPER, LOW);
-
+    
+    // Minimamente un delay acá? al menos de debug
+    delay(5000);
+    IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
+    
+    // Levantar feedback de activación
+    if( BUMPER_DERECHO_ACTIVO ) {
+      // Soltar BUMPER
+      digitalWrite(BUMPER_DERECHO, LOW);
+      //scoreUpdate(mecanismo);
+      IMPRIMIR("feedback: Correcto");
+      return true;
+    } else {
+      //Error con la activación (podría ser reintentar?)
+      IMPRIMIR("ERROR con activación");
+      return false;
+    }
+    
   } else if (mecanismo == SERIAL_BUMPER_IZQUIERDO) {
      
-    IMPRIMIR("Bumper   IZQUIERDO");
-      
-    // Activar flipper izquierdo
     digitalWrite(BUMPER_IZQUIERDO, HIGH);
-    digitalWrite(LED_STATUS_BUMPER, HIGH);
-
-    // TO DO: levantar feedback de activación
-
-    // Soltar flipper izquierdo
-    digitalWrite(BUMPER_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_BUMPER, LOW);
+    
+    // Minimamente un delay acá? al menos de debug
+    delay(5000);
+    IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
+    
+    // Levantar feedback de activación
+    if( BUMPER_IZQUIERDO_ACTIVO ) {
+      // Soltar BUMPER
+      digitalWrite(BUMPER_IZQUIERDO, LOW);
+      //scoreUpdate(mecanismo);
+      IMPRIMIR("feedback: Correcto");
+      return true;
+    } else {
+      //Error con la activación (podría ser reintentar?)
+      IMPRIMIR("ERROR con activación");
+      return false;
+    }
  
   } else if (mecanismo == SERIAL_SLINGSHOT_DERECHO) {
     
-    IMPRIMIR("Slingshot   DERECHO");
-      
-    // Activar flipper izquierdo
     digitalWrite(SLINGSHOT_DERECHO, HIGH);
-    digitalWrite(LED_STATUS_SLINGSHOT, HIGH);
-
-    // TO DO: levantar feedback de activación
-
-    // Soltar flipper izquierdo
-    digitalWrite(SLINGSHOT_DERECHO, LOW);
-    digitalWrite(LED_STATUS_SLINGSHOT, LOW);
-
+    
+    // Minimamente un delay acá? al menos de debug
+    delay(5000);
+    IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
+    
+    // Levantar feedback de activación
+    if( SLINGSHOT_DERECHO_ACTIVO ) {
+      // Soltar SLINGSHOT
+      digitalWrite(SLINGSHOT_DERECHO, LOW);
+      //scoreUpdate(mecanismo);
+      IMPRIMIR("feedback: Correcto");
+      return true;
+    } else {
+      //Error con la activación (podría ser reintentar?)
+      IMPRIMIR("ERROR con activación");
+      return false;
+    }
   } else if (mecanismo == SERIAL_SLINGSHOT_IZQUIERDO) {
     
-    IMPRIMIR("Slingshot   IZQUIERDO");
-      
-    // Activar flipper izquierdo
     digitalWrite(SLINGSHOT_IZQUIERDO, HIGH);
-    digitalWrite(LED_STATUS_SLINGSHOT, HIGH);
-
-    // TO DO: levantar feedback de activación
-
-    // Soltar flipper izquierdo
-    digitalWrite(SLINGSHOT_IZQUIERDO, LOW);
-    digitalWrite(LED_STATUS_SLINGSHOT, LOW);
-
+    
+    // Minimamente un delay acá? al menos de debug
+    delay(5000);
+    IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
+    
+    // Levantar feedback de activación
+    if( SLINGSHOT_IZQUIERDO_ACTIVO ) {
+      // Soltar SLINGSHOT
+      digitalWrite(SLINGSHOT_IZQUIERDO, LOW);
+      //scoreUpdate(mecanismo);
+      IMPRIMIR("feedback: Correcto");
+      return true;
+    } else {
+      //Error con la activación (podría ser reintentar?)
+      IMPRIMIR("ERROR con activación");
+      return false;
+    }
   } else if (mecanismo == SERIAL_BALL_RETURN) {
     
-    IMPRIMIR("BALL RETURN");
-      
-    // Activar flipper izquierdo
     digitalWrite(BALL_RETURN, HIGH);
-    digitalWrite(LED_STATUS_BALL_RETURN, HIGH);
-
-    // TO DO: levantar feedback de activación
-
-    //
-    digitalWrite(BALL_RETURN, LOW);
-    digitalWrite(LED_STATUS_BALL_RETURN, LOW);
-
+    
+    // Minimamente un delay acá? al menos de debug
+    delay(5000);
+    IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
+    
+    // Levantar feedback de activación
+    if( BALL_RETURN_ACTIVO ) {
+      // Soltar SLINGSHOT
+      digitalWrite(BALL_RETURN, LOW);
+      //scoreUpdate(mecanismo);
+      IMPRIMIR("feedback: Correcto");
+      return true;
   } else {
     IMPRIMIR("Mecanismo incorrecto");
   }
