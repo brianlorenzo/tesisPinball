@@ -141,17 +141,6 @@ void setup() {
 
 }
 
-void loop() {
-    
-    while (Serial.available() > 0) {  // Verifica si hay datos disponibles en el puerto serial
-    String input = Serial.readString();  // Lee la cadena de caracteres desde el puerto serial
-
-    //Usa el comando serial para activar mecanismos
-    serialActivation(input); 
-    
-    }
-  
-}
 
 
 // FUNCIONES
@@ -428,3 +417,16 @@ void serialInterrupt(){
   activarFlipper(recibido);
   
 }*/
+
+
+void loop() {
+    
+    while (Serial.available() > 0) {  // Verifica si hay datos disponibles en el puerto serial
+    String input = Serial.readString();  // Lee la cadena de caracteres desde el puerto serial
+
+    //Usa el comando serial para activar mecanismos
+    serialActivation(input); 
+    
+    }
+  
+}
