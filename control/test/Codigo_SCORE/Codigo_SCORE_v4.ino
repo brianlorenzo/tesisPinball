@@ -13,7 +13,7 @@ unsigned long tiempoInicioPartida;                             // Tiempo en mili
 unsigned long duracionPartida;                                 // Variable que cuenta duracion de la partida. 
 unsigned long puntaje;                                         // Varible usada para ir contando los puntos de la partida.
 int vidas;                                                     // Cantidad de vidas de cada "juego".
-char log[12];                                                   
+char log[12];                                                  // Buffer para guardar el valor del tiempo formateado.                                          
                                     
 void setup() {
   //Configuraciones necesarias para el microprocesador:

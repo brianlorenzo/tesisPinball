@@ -11,7 +11,7 @@ void scoreFinal() {
   IMPRIMIR(puntaje);
   IMPRIMIR("-------Duracion total de la partida:-------");
   convierteTiempo(duracionPartida, log);
-  //puede ser que falte print.
+  IMPRIMIR(log);
 }
 
 
