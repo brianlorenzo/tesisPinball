@@ -8,7 +8,7 @@
 #define SCORE_S 15                                                 //Slingshots dan 15pts
 #define SCORE_B 10                                                 //Pop Bumpers dan 10pts
 #define SCORE_BR 5                                                 //Inicio de Partida de 5pts
-#define PUNTOS_POR_SEG 2                                           //Puntos por segundo de vida
+#define PUNTOS_POR_SEG 2.0                                         //Puntos por segundo de vida
 
         
 //Defino funciones

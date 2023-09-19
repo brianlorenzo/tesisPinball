@@ -9,11 +9,11 @@
 
 
 //DECLARAMOS VARIABLES GLOBALES
-unsigned long tiempoInicioPartida;                              // Tiempo en milisegundos en el que comenzó la partida.                              // Tiempo en milisegundos en el que comenzó la vida actual.
-unsigned long duracionPartida;
-unsigned long puntaje;                                                   // Varible usada para ir contando los puntos de la partida.
-int vidas;                                                     //Cantidad de vidas de cada "juego".
-char log[12];                                     
+unsigned long tiempoInicioPartida;                             // Tiempo en milisegundos en el que comenzó la partida.                              // Tiempo en milisegundos en el que comenzó la vida actual.
+unsigned long duracionPartida;                                 // Variable que cuenta duracion de la partida. 
+unsigned long puntaje;                                         // Varible usada para ir contando los puntos de la partida.
+int vidas;                                                     // Cantidad de vidas de cada "juego".
+char log[12];                                                   
                                     
 void setup() {
   //Configuraciones necesarias para el microprocesador:
