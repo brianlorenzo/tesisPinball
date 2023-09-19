@@ -17,6 +17,8 @@
 
 
 
+
+
 //----------------- F L I P P E R S ----------------- //
 #define LED_STATUS_FLIPPER A0
 #define FLIPPER_DERECHO 2
@@ -60,6 +62,17 @@
 //Nombre consola: BR
 #define SERIAL_BALL_RETURN "BR"
 //-----------------//-----------------//-----------------
+
+
+// Definimos estado de los mecanismos para chequear feedback
+#define FLIPPER_DERECHO_ACTIVO digitalRead(FLIPPER_DERECHO_FBK)
+#define FLIPPER_IZQUIERDO_ACTIVO digitalRead(FLIPPER_IZQUIERDO_FBK)
+#define SLINGSHOT_DERECHO_ACTIVO digitalRead(SLINGSHOT_DERECHO_FBK)
+#define SLINGSHOT_IZQUIERDO_ACTIVO digitalRead(SLINGSHOT_IZQUIERDO_FBK)
+#define BUMPER_DERECHO_ACTIVO digitalRead(BUMPER_DERECHO_FBK)
+#define BUMPER_IZQUIERDO_ACTIVO digitalRead(BUMPER_IZQUIERDO_FBK)
+#define BALL_RETURN_ACTIVO digitalRead(BALL_RETURN_FBK)
+
 
 
 // Comandos de juego
