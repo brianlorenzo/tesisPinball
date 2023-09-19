@@ -34,7 +34,7 @@ void loop() {
     // Paso 1: Disparo la bola por primera vez.
     //Se chequea que la pelota esta lista, y se chequea el disparo. 
     //Hay dos errores posibles.
-  if (BALL_RETURN_READY){
+  if (BALL_RETURN_ACTIVO){
     if (ACTIVAR_BALL_RETURN()) {
       scoreInit();
     }else{
