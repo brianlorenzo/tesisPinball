@@ -1,17 +1,18 @@
 #include <defines.h>
 
-//DECLARAMOS VARIABLES GLOBALES
-unsigned long tiempoInicioPartida;                             // Tiempo en milisegundos en el que comenzó la partida.                              // Tiempo en milisegundos en el que comenzó la vida actual.
-unsigned long duracionPartida;                                 // Variable que cuenta duracion de la partida. 
-unsigned long puntaje;                                         // Varible usada para ir contando los puntos de la partida.
-int vidas;                                                     // Cantidad de vidas de cada "juego".
-char log[12];                                                  // Buffer para guardar el valor del tiempo formateado.                                          
-                   
+
+unsigned long puntaje;
+int vidas;
+unsigned long tiempoInicioPartida;
+unsigned long duracionPartida;
+char log[12];
+
+
 
 //FUNCIONES QUE UTILIZAMOS EN LA LOGICA DEL JUEGO:
 
 // Función para manejar el final del juego.
-void scoreFinal() {
+void scoreFinal(unsigned long duracionPartida) {
   //round redondea, al imprimir usar (msg,0) para sacar los decimales.
   puntaje = round(duracionPartida / 1000 * PUNTOS_POR_SEG);      //Se calculan puntajes en la partida y no en cada vida.
   IMPRIMIR("-----------------Game Over-----------------");
@@ -19,7 +20,8 @@ void scoreFinal() {
   IMPRIMIR(puntaje);
   IMPRIMIR("-------Duracion total de la partida:-------");
   convierteTiempo(duracionPartida, log);
-  IMPRIMIR(log);
+  Serial.println(log);
+  //IMPRIMIR(log);
 }
 
 

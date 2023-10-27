@@ -1,4 +1,4 @@
-#include <defines.h>
+#include <defines.h> // C:\Program Files (x86)\Arduino\libraries\defines
 #include <Adafruit_NeoPixel.h>
 
 // Delay no bloqueante
@@ -138,7 +138,6 @@ void setup() {
  //PINES
  pinConfig();
   
-
 }
 
 
@@ -201,6 +200,11 @@ void pinConfig(){
     pinMode(BUMPER_IZQUIERDO_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Bumper Izquierdo CONFIG OK");
+
+    pinMode(BALL_RETURN, OUTPUT);
+    pinMode(BALL_RETURN_FBK, INPUT);
+    //TO DO: Chequear feedback antes de dar OK
+    IMPRIMIR("Ball Return CONFIG OK");
 }
 
 //void activarMecanismo(String mecanismo){
@@ -221,7 +225,7 @@ boolean activarMecanismo(String mecanismo){
     
     // Minimamente un delay acá? al menos de debug
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    delay(5000);
+    delay(100);
 
     // TO DO: levantar feedback de activación
     if( FLIPPER_DERECHO_ACTIVO ) {
@@ -246,7 +250,7 @@ boolean activarMecanismo(String mecanismo){
     
     // Minimamente un delay acá? al menos de debug
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    delay(5000);
+    delay(100);
     // Levantar feedback de activación
     if( FLIPPER_IZQUIERDO_ACTIVO ) {
       // Soltar flipper derecho
@@ -267,7 +271,7 @@ boolean activarMecanismo(String mecanismo){
     
     // Minimamente un delay acá? al menos de debug
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    delay(5000);
+    delay(100);
     
     // Levantar feedback de activación
     if( BUMPER_DERECHO_ACTIVO ) {
@@ -289,7 +293,7 @@ boolean activarMecanismo(String mecanismo){
     
     // Minimamente un delay acá? al menos de debug
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    delay(5000);  
+    delay(100);  
       
     // Levantar feedback de activación
     if( BUMPER_IZQUIERDO_ACTIVO ) {
@@ -311,7 +315,7 @@ boolean activarMecanismo(String mecanismo){
     
     // Minimamente un delay acá? al menos de debug
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    delay(5000);   
+    delay(100);   
     // Levantar feedback de activación
     if( SLINGSHOT_DERECHO_ACTIVO ) {
       // Soltar SLINGSHOT
@@ -331,7 +335,7 @@ boolean activarMecanismo(String mecanismo){
     
     // Minimamente un delay acá? al menos de debug
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    delay(5000);     
+    delay(100);     
     // Levantar feedback de activación
     if( SLINGSHOT_IZQUIERDO_ACTIVO ) {
       // Soltar SLINGSHOT
@@ -350,10 +354,10 @@ boolean activarMecanismo(String mecanismo){
     
     // Minimamente un delay acá? al menos de debug
     IMPRIMIR(mecanismo + "  fue activado. Se espera feedback");
-    delay(5000);   
+    delay(100);   
     // Levantar feedback de activación
     if( BALL_RETURN_ACTIVO ) {
-      // Soltar SLINGSHOT
+      // Soltar BALL RETURN
       digitalWrite(BALL_RETURN, LOW);
       //scoreUpdate(mecanismo);
       IMPRIMIR("feedback: Correcto");
@@ -426,7 +430,7 @@ void loop() {
 
     //Usa el comando serial para activar mecanismos
     serialActivation(input); 
-    
+   
     }
   
 }

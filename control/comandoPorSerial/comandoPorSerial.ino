@@ -1,63 +1,85 @@
-// Pines Mecanismos
+// ----------------------Pines Mecanismos ------------------------//
 
-//----------------- F L I P P E R S ----------------- //
+//----------------- F L I P P E R S -----------------//
 #define LED_STATUS_FLIPPER A0
 
-#define FLIPPER_DERECHO 2
-#define FLIPPER_DERECHO_FBK 8
+#define FLIPPER_DERECHO 3
+#define FLIPPER_DERECHO_FBK 14
+
+#define FLIPPER_DERECHO_ACTIVO digitalRead(FLIPPER_DERECHO_FBK)
+boolean flipperDerechoActivo;
 
 //Nombre consola: FD
 #define SERIAL_FLIPPER_DERECHO "FD"
+//********************//
+#define FLIPPER_IZQUIERDO 4
+#define FLIPPER_IZQUIERDO_FBK 12
 
-#define FLIPPER_IZQUIERDO 3
-#define FLIPPER_IZQUIERDO_FBK 9
-#define IZQUIERDO 'I'
+#define FLIPPER_IZQUIERDO_ACTIVO digitalRead(FLIPPER_IZQUIERDO_FBK)
+boolean flipperIzquierdoActivo;
 
 //Nombre consola: FI
 #define SERIAL_FLIPPER_IZQUIERDO "FI"
+//********************//
 
-//----------------- S L I N G S H O T S ----------------- //
+//----------------- S L I N G S H O T S -----------------//
 #define LED_STATUS_SLINGSHOT 13
 
-#define SLINGSHOT_DERECHO 4
-#define SLINGSHOT_DERECHO_FBK 10
+#define SLINGSHOT_DERECHO 5
+#define SLINGSHOT_DERECHO_FBK 16
+
+#define SLINGSHOT_DERECHO_ACTIVO digitalRead(SLINGSHOT_DERECHO_FBK)
+boolean slingshotDerechoActivo;
 
 //Nombre consola: SD
 #define SERIAL_SLINGSHOT_DERECHO "SD"
-
-
-#define SLINGSHOT_IZQUIERDO 5
+//********************//
+#define SLINGSHOT_IZQUIERDO 6
 #define SLINGSHOT_IZQUIERDO_FBK 11
+
+#define SLINGSHOT_IZQUIERDO_ACTIVO digitalRead(SLINGSHOT_IZQUIERDO_FBK)
+boolean slingshotIzquierdoActivo;
 
 //Nombre consola: SI
 #define SERIAL_SLINGSHOT_IZQUIERDO "SI"
-
+//********************//
 
 //----------------- B U M P E R S ----------------- //
 #define LED_STATUS_BUMPER 13
 
-#define BUMPER_DERECHO 6
-#define BUMPER_DERECHO_FBK 12
+#define BUMPER_DERECHO 7
+#define BUMPER_DERECHO_FBK 15
+
+#define BUMPER_DERECHO_ACTIVO digitalRead(BUMPER_DERECHO_FBK)
+boolean bumperDerechoActivo;
 
 //Nombre consola: BD
 #define SERIAL_BUMPER_DERECHO "BD"
-
-#define BUMPER_IZQUIERDO 7
+//********************//
+#define BUMPER_IZQUIERDO 8
 #define BUMPER_IZQUIERDO_FBK 13
+
+#define BUMPER_IZQUIERDO_ACTIVO digitalRead(BUMPER_IZQUIERDO_FBK)
+boolean bumperIzquierdoActivo;
 
 //Nombre consola: BI
 #define SERIAL_BUMPER_IZQUIERDO "BI"
-
+//********************//
 
 //----------------- B A L L   R E T U R N  ----------------- //
 #define LED_STATUS_BALL_RETURN 13
 
-#define BALL_RETURN 12
-#define BALL_RETURN_FBK 13
+#define BALL_RETURN 9
+#define BALL_RETURN_FBK 17
+
+#define BALL_RETURN_ACTIVO digitalRead(BALL_RETURN_FBK)
+//  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
+//  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
+boolean ballReturnActivo;
 
 //Nombre consola: BR
 #define SERIAL_BALL_RETURN "BR"
-
+//********************//
 
 // Comandos de juego
 #define ACTIVAR_FLIPPER_IZQUIERDO()     activarMecanismo(SERIAL_FLIPPER_IZQUIERDO)
@@ -319,6 +341,7 @@ void activarMecanismo(String mecanismo){
 
       // Soltar flipper derecho
       digitalWrite(FLIPPER_DERECHO, LOW);
+      IMPRIMIR("FEEDBACK OK");
     } else {
 
     }
@@ -337,7 +360,7 @@ void activarMecanismo(String mecanismo){
     digitalWrite(LED_STATUS_FLIPPER, HIGH);
 
     // TO DO: levantar feedback de activación
-
+  delay(100);
     // Soltar flipper izquierdo
     digitalWrite(FLIPPER_IZQUIERDO, LOW);
     digitalWrite(LED_STATUS_FLIPPER, LOW);
