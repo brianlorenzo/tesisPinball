@@ -1,4 +1,5 @@
-#include <defines.h> // C:\Program Files (x86)\Arduino\libraries\defines
+#include <defines.h> // C:\Program Files (x86)\Arduino\libraries\defines o ~/Documents/Arduino/libraries/defines 
+#include <led.h>
 #include <Adafruit_NeoPixel.h>
 
 // Delay no bloqueante
@@ -15,6 +16,7 @@ boolean bumperDerechoActivo;
 boolean bumperIzquierdoActivo;
 boolean ballReturnActivo;
 
+/* I N C L U I D O en led.h
 
 //Inicializa el LED Neopixel
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, LED_INTERNO, NEO_GRB + NEO_KHZ800);
@@ -61,8 +63,9 @@ void blinkLED(int led, int ms, int times = 1){
   }
 }
 
+*/
 
- void serialActivation(String input){
+void serialActivation(String input){
   
   if (input.length() > 0) {
     // Elimina el último carácter de la cadena
@@ -189,7 +192,7 @@ void pinConfig(){
     //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Slingshot Derecho CONFIG OK");
 
-  //Bumper
+  //Bumpers
     pinMode(BUMPER_DERECHO, OUTPUT);
     pinMode(BUMPER_DERECHO_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK
@@ -201,6 +204,7 @@ void pinConfig(){
     //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Bumper Izquierdo CONFIG OK");
 
+//Ball Return
     pinMode(BALL_RETURN, OUTPUT);
     pinMode(BALL_RETURN_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK

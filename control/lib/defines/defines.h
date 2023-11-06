@@ -1,7 +1,6 @@
 //libreria con todas las definiciones de los codigos:
-
+#include <asignaciones.h>
 // Agregar: activarMecanismos o funcionesaux.h
-//Definiciones del SCORE:
 
 //Definicion de los puntajes
 #define SCORE_F 20                                                 //Flippers dan 20pts
@@ -9,66 +8,30 @@
 #define SCORE_B 10                                                 //Pop Bumpers dan 10pts
 #define SCORE_BR 5                                                 //Inicio de Partida de 5pts
 #define PUNTOS_POR_SEG 2.0                                         //Puntos por segundo de vida
-
-        
+ 
 //Defino funciones
 #define IMPRIMIR(msg) Serial.println(msg);                         
 #define checkFeedback(int) digitalRead(int);
 
-
-//----------------- F L I P P E R S ----------------- //
-#define LED_STATUS_FLIPPER A0
-#define FLIPPER_DERECHO 3
-#define FLIPPER_DERECHO_FBK 14
-//Nombre consola: FD
-#define SERIAL_FLIPPER_DERECHO "FD"
-//-----------------//-----------------//-----------------
-#define FLIPPER_IZQUIERDO 4
-#define FLIPPER_IZQUIERDO_FBK 12
-#define IZQUIERDO 'I'
-//Nombre consola: FI
-#define SERIAL_FLIPPER_IZQUIERDO "FI"
-//-----------------//-----------------//-----------------
-//----------------- S L I N G S H O T S ----------------- //
-#define LED_STATUS_SLINGSHOT 13
-#define SLINGSHOT_DERECHO 5
-#define SLINGSHOT_DERECHO_FBK 16
-//Nombre consola: SD
-#define SERIAL_SLINGSHOT_DERECHO "SD"
-//-----------------//-----------------//-----------------
-#define SLINGSHOT_IZQUIERDO 6
-#define SLINGSHOT_IZQUIERDO_FBK 11
-//Nombre consola: SI
-#define SERIAL_SLINGSHOT_IZQUIERDO "SI"
-//----------------- B U M P E R S ----------------- //
-#define LED_STATUS_BUMPER 13
-#define BUMPER_DERECHO 7
-#define BUMPER_DERECHO_FBK 15
-//Nombre consola: BD
-#define SERIAL_BUMPER_DERECHO "BD"
-//-----------------//-----------------//-----------------
-#define BUMPER_IZQUIERDO 8
-#define BUMPER_IZQUIERDO_FBK 13
-//Nombre consola: BI
-#define SERIAL_BUMPER_IZQUIERDO "BI"
-//-----------------//-----------------//-----------------
-//----------------- B A L L   R E T U R N  ----------------- //
-#define LED_STATUS_BALL_RETURN 13
-#define BALL_RETURN 9
-#define BALL_RETURN_FBK 17
-//Nombre consola: BR
-#define SERIAL_BALL_RETURN "BR"
-//-----------------//-----------------//-----------------
+boolean flipperDerechoActivo;
+boolean flipperIzquierdoActivo;
+boolean slingshotDerechoActivo;
+boolean slingshotIzquierdoActivo;
+boolean bumperDerechoActivo;
+boolean bumperIzquierdoActivo;
+boolean ballReturnActivo;
 
 
 // Definimos estado de los mecanismos para chequear feedback
-#define FLIPPER_DERECHO_ACTIVO digitalRead(FLIPPER_DERECHO_FBK)
-#define FLIPPER_IZQUIERDO_ACTIVO digitalRead(FLIPPER_IZQUIERDO_FBK)
-#define SLINGSHOT_DERECHO_ACTIVO digitalRead(SLINGSHOT_DERECHO_FBK)
-#define SLINGSHOT_IZQUIERDO_ACTIVO digitalRead(SLINGSHOT_IZQUIERDO_FBK)
-#define BUMPER_DERECHO_ACTIVO digitalRead(BUMPER_DERECHO_FBK)
-#define BUMPER_IZQUIERDO_ACTIVO digitalRead(BUMPER_IZQUIERDO_FBK)
-#define BALL_RETURN_ACTIVO digitalRead(BALL_RETURN_FBK)
+#define FLIPPER_DERECHO_ACTIVO      digitalRead(FLIPPER_DERECHO_FBK)
+#define FLIPPER_IZQUIERDO_ACTIVO    digitalRead(FLIPPER_IZQUIERDO_FBK)
+#define SLINGSHOT_DERECHO_ACTIVO    digitalRead(SLINGSHOT_DERECHO_FBK)
+#define SLINGSHOT_IZQUIERDO_ACTIVO  digitalRead(SLINGSHOT_IZQUIERDO_FBK)
+#define BUMPER_DERECHO_ACTIVO       digitalRead(BUMPER_DERECHO_FBK)
+#define BUMPER_IZQUIERDO_ACTIVO     digitalRead(BUMPER_IZQUIERDO_FBK)
+#define BALL_RETURN_ACTIVO          digitalRead(BALL_RETURN_FBK)
+//  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
+//  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
 
 
 
