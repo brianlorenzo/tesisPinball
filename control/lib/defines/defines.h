@@ -1,26 +1,19 @@
 //libreria con todas las definiciones de los codigos:
+#ifndef _DEFINES_H
+#define _DEFINES_H
+
 #include <asignaciones.h>
-// Agregar: activarMecanismos o funcionesaux.h
+#include <led.h>
 
 //Definicion de los puntajes
-#define SCORE_F 20                                                 //Flippers dan 20pts
-#define SCORE_S 15                                                 //Slingshots dan 15pts
-#define SCORE_B 10                                                 //Pop Bumpers dan 10pts
-#define SCORE_BR 5                                                 //Inicio de Partida de 5pts
-#define PUNTOS_POR_SEG 2.0                                         //Puntos por segundo de vida
+#define SCORE_F 20              //Flippers dan 20pts
+#define SCORE_S 15              //Slingshots dan 15pts
+#define SCORE_B 10              //Pop Bumpers dan 10pts
+#define SCORE_BR 5              //Inicio de Partida de 5pts
+#define PUNTOS_POR_SEG 2.0      //Puntos por segundo de vida
  
-//Defino funciones
+//Defino funciones auxiliares
 #define IMPRIMIR(msg) Serial.println(msg);                         
-#define checkFeedback(int) digitalRead(int);
-
-boolean flipperDerechoActivo;
-boolean flipperIzquierdoActivo;
-boolean slingshotDerechoActivo;
-boolean slingshotIzquierdoActivo;
-boolean bumperDerechoActivo;
-boolean bumperIzquierdoActivo;
-boolean ballReturnActivo;
-
 
 // Definimos estado de los mecanismos para chequear feedback
 #define FLIPPER_DERECHO_ACTIVO      digitalRead(FLIPPER_DERECHO_FBK)
@@ -32,8 +25,6 @@ boolean ballReturnActivo;
 #define BALL_RETURN_ACTIVO          digitalRead(BALL_RETURN_FBK)
 //  Si el pin está en 1: sensor inductivo activo (la bola está ahí)
 //  Si el pin está en 0: sensor inductivo inactivo (la bola NO está ahí)
-
-
 
 // Comandos de juego
 #define ACTIVAR_FLIPPER_IZQUIERDO()     activarMecanismo(SERIAL_FLIPPER_IZQUIERDO)
@@ -50,27 +41,10 @@ boolean ballReturnActivo;
 
 
 // Comandos generales
+/*
 #define MEC_STANDBY 0
 #define MEC_ACTIVO  1
 #define MEC_ERROR   2
+*/
 
-
-// L E D   I N T E R N O
-#define LED_INTERNO 18 // El pin al que está conectado el LED RGB
-#define LED_STATUS_MECANISMOS LED_BUILTIN
-
-// Parámetros de configuración del LED RGB
-#define NUM_PIXELS 1 // Número de LEDs en la tira (en este caso, solo uno)
-#define BRIGHTNESS 50 // Brillo (ajusta según tus preferencias)
-
-// Define las constantes para los colores
-#define COLOR_RED strip.Color(255, 0, 0)
-#define COLOR_GREEN strip.Color(0, 255, 0)
-#define COLOR_YELLOW strip.Color(255, 255, 0)
-#define COLOR_BLUE strip.Color(0, 0, 255)
-#define COLOR_WHITE strip.Color(255, 255, 255)
-#define COLOR_ORANGE strip.Color(255, 165, 0)
-#define COLOR_PURPLE strip.Color(128, 0, 128)
-#define COLOR_LED_OFF strip.Color(0, 0, 0) 
-
-#define OFF "OFF"
+#endif

@@ -1,9 +1,6 @@
 #include <defines.h> // C:\Program Files (x86)\Arduino\libraries\defines o ~/Documents/Arduino/libraries/defines 
-//
+#include <led.h>
 #include <Adafruit_NeoPixel.h>
-//#include "../lib/Adafruit_NeoPixel.h" SOLUCIONAR PORFA
-
-#define LED_STATUS_MECANISMOS LED_BUILTIN
 
 // Delay no bloqueante
 unsigned long previousMillis = 0;
@@ -20,7 +17,8 @@ boolean bumperDerechoActivo;
 boolean bumperIzquierdoActivo;
 boolean ballReturnActivo;
 */
-/*
+/* I N C L U I D O en led.h
+
 //Inicializa el LED Neopixel
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, LED_INTERNO, NEO_GRB + NEO_KHZ800);
 
@@ -65,9 +63,10 @@ void blinkLED(int led, int ms, int times = 1){
   delay(ms);
   }
 }
+
 */
 
- void serialActivation(String input){
+void serialActivation(String input){
   
   if (input.length() > 0) {
     // Elimina el último carácter de la cadena

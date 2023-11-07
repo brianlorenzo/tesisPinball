@@ -1,3 +1,8 @@
+// Contiene solo #defines para identificar cada mecanismo
+// con su pin de conexión correspondiente
+#ifndef _ASIGNACIONES_H
+#define _ASIGNACIONES_H
+
 //----------------- M E C A N I S M O S ----------------- //
 #define FLIPPER_DERECHO     3 
 #define FLIPPER_IZQUIERDO   4
@@ -33,3 +38,5 @@
 #define SERIAL_BUMPER_IZQUIERDO     "BI"
 
 #define SERIAL_BALL_RETURN          "BR"
+
+#endif

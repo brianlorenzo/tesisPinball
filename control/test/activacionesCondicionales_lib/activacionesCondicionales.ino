@@ -1,71 +1,15 @@
 #include <defines.h> // C:\Program Files (x86)\Arduino\libraries\defines o ~/Documents/Arduino/libraries/defines 
 //
 #include <Adafruit_NeoPixel.h>
-//#include "../lib/Adafruit_NeoPixel.h" SOLUCIONAR PORFA
+//#include "../Users/brianlorenzo/Desktop/UCU/TesisUCU/Pinball/tesisPinball/control/lib/Adafruit_NeoPixel/Adafruit_NeoPixel.h" SOLUCIONAR PORFA
 
-#define LED_STATUS_MECANISMOS LED_BUILTIN
+//#define LED_STATUS_MECANISMOS LED_BUILTIN
 
 // Delay no bloqueante
 unsigned long previousMillis = 0;
 unsigned long delayInterval = 1000;
 bool delayInProgress = false;
 
-/*
-//declaramos funciones booleanas (1 / 0)
-boolean flipperDerechoActivo;
-boolean flipperIzquierdoActivo;
-boolean slingshotDerechoActivo;
-boolean slingshotIzquierdoActivo;
-boolean bumperDerechoActivo;
-boolean bumperIzquierdoActivo;
-boolean ballReturnActivo;
-*/
-/*
-//Inicializa el LED Neopixel
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, LED_INTERNO, NEO_GRB + NEO_KHZ800);
-
-// Led interno Neopixel
-void ledSetup(){
-  strip.begin();
-  strip.setBrightness(BRIGHTNESS);
-  strip.show(); // Inicialmente, apagar el LED RGB
-}
-
-// Led interno Neopixel
-void setLED(String color) {
-  if (color == SERIAL_FLIPPER_DERECHO) {
-    strip.setPixelColor(0, COLOR_RED);
-  } else if (color == SERIAL_FLIPPER_IZQUIERDO) {
-    strip.setPixelColor(0, COLOR_GREEN);
-  } else if (color == SERIAL_SLINGSHOT_IZQUIERDO) {
-    strip.setPixelColor(0, COLOR_YELLOW);
-  } else if (color == SERIAL_SLINGSHOT_DERECHO) {
-    strip.setPixelColor(0, COLOR_BLUE);
-  } else if (color == SERIAL_BUMPER_DERECHO) {
-    strip.setPixelColor(0, COLOR_WHITE);
-  } else if (color == SERIAL_BUMPER_IZQUIERDO) {
-    strip.setPixelColor(0, COLOR_ORANGE);
-  } else if (color == SERIAL_BALL_RETURN) {
-    strip.setPixelColor(0, COLOR_PURPLE);
-  } else {
-    // Si el color no es uno de los especificados, apagar el LED
-    strip.setPixelColor(0, strip.Color(255, 255, 255));
-  }
-
-  strip.show(); // Actualizar el LED RGB con el color seleccionado
-}
-
-// Led en pin digital
-void blinkLED(int led, int ms, int times = 1){
-// Hace blink de un led por determinados ms "times" veces      
-  for (int i = 0; i < times; i++) {
-  digitalWrite(led, HIGH);
-  delay(ms);
-  digitalWrite(led, LOW);
-  delay(ms);
-  }
-}
-*/
 
  void serialActivation(String input){
   
