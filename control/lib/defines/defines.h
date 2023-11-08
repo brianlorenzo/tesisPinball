@@ -13,6 +13,8 @@
 #define PUNTOS_POR_SEG 2.0      //Puntos por segundo de vida
  
 //Defino funciones auxiliares
+
+//Imprime en serial siguiente línea
 #define IMPRIMIR(msg) Serial.println(msg);                         
 
 // Definimos estado de los mecanismos para chequear feedback
@@ -46,5 +48,12 @@
 #define MEC_ACTIVO  1
 #define MEC_ERROR   2
 */
+
+// Chequea FBK, imprime por serial resultado
+void chequeoFBK(int PIN_MECANISMO_FBK);
+
+//Configura pines como entrada y salida
+void pinConfig();
+
 
 #endif
