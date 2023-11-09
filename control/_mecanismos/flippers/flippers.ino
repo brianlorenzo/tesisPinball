@@ -30,14 +30,14 @@ void loop(){
         //Activa según comando recibido
         if (input == "FD"){
             digitalWrite(FLIPPER_DERECHO, HIGH);
-            delay(50);
+            delay(25);
             chequeoFBK(FLIPPER_DERECHO_FBK);
             digitalWrite(FLIPPER_DERECHO, LOW);
         }
         else {
             if (input == "FI") {
                 digitalWrite(FLIPPER_IZQUIERDO, HIGH);
-                delay(50);
+                delay(25);
                 chequeoFBK(FLIPPER_IZQUIERDO_FBK);
                 digitalWrite(FLIPPER_IZQUIERDO, LOW);
 

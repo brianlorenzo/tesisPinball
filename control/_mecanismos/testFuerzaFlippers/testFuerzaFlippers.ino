@@ -3,6 +3,7 @@
 //DELAY   10    PATADITA y a veces erra
 //DELAY   15    NORMAL a veces hace PATADITA
 //DELAY   20    NORMAL siempre
+//DELAY   25    NORMAL y seguro
 
 void setup() {
  
@@ -32,6 +33,7 @@ void loop(){
         
         IMPRIMIR("Comando recibido: " + input);
 
+        //Si recibi algo NUEVO
         if (input != input_old){
             input_old = input ;
             IMPRIMIR("nuevo delay:  " + input);

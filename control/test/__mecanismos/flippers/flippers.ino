@@ -1,6 +1,9 @@
 #include <defines.h>
 
-//DELAY   10    PATADITA SUAVE
+//DELAY   10    PATADITA y a veces erra
+//DELAY   15    NORMAL a veces hace PATADITA
+//DELAY   20    NORMAL siempre
+//DELAY   25    NORMAL y seguro
 
 void setup() {
  
@@ -30,14 +33,14 @@ void loop(){
     //Activa según comando recibido
     if (input == "FD"){
         digitalWrite(FLIPPER_DERECHO, HIGH);
-        delay(50);
+        delay(25);
         chequeoFBK(FLIPPER_DERECHO_FBK);
         digitalWrite(FLIPPER_DERECHO, LOW);
     }
     else {
         if (input == "FI") {
             digitalWrite(FLIPPER_IZQUIERDO, HIGH);
-            delay(50);
+            delay(25);
             chequeoFBK(FLIPPER_IZQUIERDO_FBK);
             digitalWrite(FLIPPER_IZQUIERDO, LOW);
 
