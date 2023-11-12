@@ -25,7 +25,10 @@ void loop(){
       digitalWrite(BALL_RETURN,LOW);
       delay(50);      
     }
-    
+
+    Serial.print(digitalRead(BALL_RETURN_FBK));
+
+    /*
     if(digitalRead(BALL_RETURN_FBK)){
 
       IMPRIMIR(" ON ");
@@ -35,5 +38,6 @@ void loop(){
       IMPRIMIR("off");
     }
     delay(10);
+    */
 
 }

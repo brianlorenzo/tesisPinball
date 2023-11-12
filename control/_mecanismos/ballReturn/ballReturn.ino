@@ -21,6 +21,9 @@ bool lecturaAlta = false;
 
 
 void loop(){
+    
+    contadorLecturasAlta = 0 ;
+    
     input = Serial.readString();  // Lee la cadena de caracteres desde el puerto serial
     input = input.substring(0, input.length() - 1); // Elimina el último carácter de la cadena "\n"
 
@@ -56,6 +59,7 @@ void loop(){
     
         if (lecturasValidas > 0) {
             lecturaAlta = true;
+           
         } else {
             lecturaAlta = false;
         }
