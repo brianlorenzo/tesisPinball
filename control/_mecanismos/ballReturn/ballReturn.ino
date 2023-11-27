@@ -11,7 +11,7 @@ void setup() {
 
  //PINES
  pinConfig();
-  
+
 }
 
 String input; 

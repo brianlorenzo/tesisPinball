@@ -63,6 +63,9 @@ void pinConfig(){
     pinMode(FLIPPER_DERECHO_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Flipper Derecho CONFIG OK");
+    //Configuración por default
+    digitalWrite(FLIPPER_DERECHO,LOW);
+    digitalWrite(FLIPPER_IZQUIERDO,LOW);
 
 
   //Slingshot
@@ -74,24 +77,32 @@ void pinConfig(){
     pinMode(SLINGSHOT_IZQUIERDO, OUTPUT);
     pinMode(SLINGSHOT_IZQUIERDO_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK
-    IMPRIMIR("Slingshot Derecho CONFIG OK");
+    IMPRIMIR("Slingshot Derecho CONFIG OK");  
+    //Configuración por default
+    digitalWrite(SLINGSHOT_DERECHO,HIGH);
+    digitalWrite(SLINGSHOT_IZQUIERDO,HIGH);
 
   //Bumpers
     pinMode(BUMPER_DERECHO, OUTPUT);
     pinMode(BUMPER_DERECHO_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Bumper Derecho CONFIG OK");
-
     
     pinMode(BUMPER_IZQUIERDO, OUTPUT);
     pinMode(BUMPER_IZQUIERDO_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Bumper Izquierdo CONFIG OK");
+    //Configuración por default
+    digitalWrite(BUMPER_DERECHO,HIGH);
+    digitalWrite(BUMPER_IZQUIERDO,HIGH);
 
 //Ball Return
     pinMode(BALL_RETURN, OUTPUT);
     pinMode(BALL_RETURN_FBK, INPUT);
     //TO DO: Chequear feedback antes de dar OK
     IMPRIMIR("Ball Return CONFIG OK");
+    //Configuración por default
+    digitalWrite(BALL_RETURN,LOW);
+
 }
 

@@ -4,16 +4,16 @@
 #define _ASIGNACIONES_H
 
 //----------------- M E C A N I S M O S ----------------- //
-#define FLIPPER_DERECHO     3 
-#define FLIPPER_IZQUIERDO   4
+#define FLIPPER_DERECHO     26//3 
+#define FLIPPER_IZQUIERDO   33//4
 
-#define SLINGSHOT_DERECHO   5
-#define SLINGSHOT_IZQUIERDO 6
+#define SLINGSHOT_DERECHO   34//5
+#define SLINGSHOT_IZQUIERDO 35//6
 
-#define BUMPER_DERECHO      7
-#define BUMPER_IZQUIERDO    8
+#define BUMPER_DERECHO      36//7
+#define BUMPER_IZQUIERDO    37//8
 
-#define BALL_RETURN         9
+#define BALL_RETURN         38//9
 
 //----------------- F E E D B A C K  ----------------- //
 #define FLIPPER_DERECHO_FBK     14
